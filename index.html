@@ -9,24 +9,31 @@
 
 <body>
     <div id="app">
-        <p>Hello vue.js</p>
+        <p>Hello {{ app }}</p>
+        <p>Counter: {{ counter + 4 }}</p>
+        <p>app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
     </div>
 
-    <!-- Vue v3 -->
+
     <script src="https://unpkg.com/vue@next"></script>
     <script>
-        const app = Vue.createApp({});
+        const app = Vue.createApp({
+            // data() {
+            //     return {
+            //         app: 'vue.js',
+            //         counter: 1,
+            //         isVue: true
+            //     }
+            // }
+            data: () => ({
+                app: 'vue.js',
+                counter: 1,
+                isVue: true
+            })
+        });
+
         const vm = app.mount('#app');
     </script>
-
-    <!-- Vue v2 -->
-    <!--
-    <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
-    <script>
-        const app = new Vue({});
-        const vm = app.$mount('#app');
-    </script>
-    -->
 </body>
 
 </html>
