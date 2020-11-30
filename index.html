@@ -12,23 +12,24 @@
         <p>Hello {{ app }}</p>
         <p>Counter: {{ counter + 4 }}</p>
         <p>app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
+        <form>
+            <input type="text" v-model="user.name" />
+        </form>
+        <h1>{{ user.name }}</h1>
     </div>
 
 
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         const app = Vue.createApp({
-            // data() {
-            //     return {
-            //         app: 'vue.js',
-            //         counter: 1,
-            //         isVue: true
-            //     }
-            // }
             data: () => ({
                 app: 'vue.js',
                 counter: 1,
-                isVue: true
+                isVue: true,
+                text: null,
+                user: {
+                    name: "ali"
+                }
             })
         });
 
