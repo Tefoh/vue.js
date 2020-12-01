@@ -22,8 +22,13 @@
     <div id="app">
         <p v-bind:id="id">Hello {{ app }}</p>
         <a :href="url">google</a>
-        <p :style="styles">Counter: {{ counter + 4 }}</p>
-        <p :class="{ 'react text-white': !isVue }">app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
+        <p :style="styles">Counter: {{ counter }}</p>
+        <button v-on:click="counter++">اضافه</button>
+        <button @click="counter--">کم کردن</button>
+        <p :class="[isVue ? 'vue text-white' : 'react text-white']"
+            @mouseover="isVue = false"
+            @mouseleave="isVue = true"
+        >app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
         <form>
             <input type="text" v-model="user.name" />
         </form>
@@ -38,8 +43,8 @@
                 url: "http://google.com/",
                 id: 'hello',
                 app: 'vue.js',
-                counter: 1,
-                isVue: false,
+                counter: 0,
+                isVue: true,
                 text: null,
                 user: {
                     name: "ali"
