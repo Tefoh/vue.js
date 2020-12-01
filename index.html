@@ -5,27 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vue.js basics</title>
+    <style>
+        .vue {
+            background-color: green;
+        }
+        .react {
+            background-color: blue;
+        }
+        .text-white {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <p>Hello {{ app }}</p>
-        <p>Counter: {{ counter + 4 }}</p>
-        <p>app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
+        <p v-bind:id="id">Hello {{ app }}</p>
+        <a :href="url">google</a>
+        <p :style="styles">Counter: {{ counter + 4 }}</p>
+        <p :class="{ 'react text-white': !isVue }">app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
         <form>
             <input type="text" v-model="user.name" />
         </form>
         <h1>{{ user.name }}</h1>
     </div>
 
-
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         const app = Vue.createApp({
             data: () => ({
+                styles: { 'background-color': 'red', color: 'white' },
+                url: "http://google.com/",
+                id: 'hello',
                 app: 'vue.js',
                 counter: 1,
-                isVue: true,
+                isVue: false,
                 text: null,
                 user: {
                     name: "ali"
