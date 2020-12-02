@@ -21,6 +21,27 @@
 <body>
     <div id="app">
         <p v-bind:id="id">Hello {{ app }}</p>
+
+        <p>js frameworks</p>
+        <ul>
+            <li v-for="(framework, index) in frameworks" 
+                :key="framework"
+            >{{ index + 1 }} - {{ framework }}</li>
+        </ul>
+
+        <p>user info</p>
+        <ul>
+            <li v-for="(item, key, index) in user"
+                :key="item"
+            >
+            {{ `${index + 1} - ${key}: ${item}` }}</li>
+        </ul>
+
+
+
+
+
+
         <a :href="url">google</a>
         <p :style="styles">Counter: {{ counter }}</p>
         <button v-on:click="inc(), logEvent($event)">اضافه</button>
@@ -48,6 +69,13 @@
     <script>
         const app = Vue.createApp({
             data: () => ({
+                frameworks: [
+                    'vue.js',
+                    'angular',
+                    'svelete.js'
+                ],
+
+
                 styles: { 'background-color': 'red', color: 'white' },
                 url: "http://google.com/",
                 id: 'hello',
@@ -56,7 +84,8 @@
                 isVue: false,
                 text: null,
                 user: {
-                    name: "ali"
+                    name: "ali",
+                    legs: 'two'
                 },
                 key: null
             }),
