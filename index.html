@@ -24,9 +24,11 @@
 
         <p>js frameworks</p>
         <ul>
-            <li v-for="(framework, index) in frameworks" 
+            <template v-for="(framework, index) in frameworks" 
                 :key="framework"
-            >{{ index + 1 }} - {{ framework }}</li>
+            >
+                <li v-if="framework !== 'react.js'">{{ index + 1 }} - {{ framework }}</li>
+            </template>
         </ul>
 
         <p>user info</p>
@@ -72,7 +74,8 @@
                 frameworks: [
                     'vue.js',
                     'angular',
-                    'svelete.js'
+                    'svelete.js',
+                    'react.js'
                 ],
 
 
