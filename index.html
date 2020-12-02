@@ -25,10 +25,18 @@
         <p :style="styles">Counter: {{ counter }}</p>
         <button v-on:click="inc(), logEvent($event)">اضافه</button>
         <button @click="counter--">کم کردن</button>
-        <p :class="[isVue ? 'vue text-white' : 'react text-white']"
-            @mouseover="isVue = false"
-            @mouseleave="isVue = true"
-        >app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
+
+
+        <p class="vue text-white" v-if="app === 'vue.js'">app type: vue.js</p>
+        <p class="react text-white" v-else-if="app === 'react.js'">react application</p>
+        <p v-else>javascript application</p>
+
+
+        <p v-show="isVue">first application</p>
+
+
+
+
         <form>
             <input type="text" v-model="user.name" @keydown="handleKeydown($event), logEvent($event)" />
             <p>کلید: {{ key }}</p>
@@ -43,9 +51,9 @@
                 styles: { 'background-color': 'red', color: 'white' },
                 url: "http://google.com/",
                 id: 'hello',
-                app: 'vue.js',
+                app: 'react.js',
                 counter: 0,
-                isVue: true,
+                isVue: false,
                 text: null,
                 user: {
                     name: "ali"
