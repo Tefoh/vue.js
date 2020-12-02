@@ -23,14 +23,15 @@
         <p v-bind:id="id">Hello {{ app }}</p>
         <a :href="url">google</a>
         <p :style="styles">Counter: {{ counter }}</p>
-        <button v-on:click="counter++">اضافه</button>
+        <button v-on:click="inc(), logEvent($event)">اضافه</button>
         <button @click="counter--">کم کردن</button>
         <p :class="[isVue ? 'vue text-white' : 'react text-white']"
             @mouseover="isVue = false"
             @mouseleave="isVue = true"
         >app type: {{ isVue ? 'vue.js' : 'react.js' }}</p>
         <form>
-            <input type="text" v-model="user.name" />
+            <input type="text" v-model="user.name" @keydown="handleKeydown($event), logEvent($event)" />
+            <p>کلید: {{ key }}</p>
         </form>
         <h1>{{ user.name }}</h1>
     </div>
@@ -48,8 +49,20 @@
                 text: null,
                 user: {
                     name: "ali"
+                },
+                key: null
+            }),
+            methods: {
+                handleKeydown: function(event) {
+                    this.key = event.key;
+                },
+                inc(number = 1) {
+                    this.counter += number;
+                },
+                logEvent(event) {
+                    console.log(event)
                 }
-            })
+            }
         });
 
         const vm = app.mount('#app');
