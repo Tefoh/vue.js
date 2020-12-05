@@ -20,6 +20,11 @@
 
 <body>
     <div id="app">
+        <div v-html="htmlText"></div>
+        <p v-pre>{{ double curly }}</p>
+
+
+
         <p v-bind:id="id">Hello {{ app }}</p>
 
         <p>js frameworks</p>
@@ -71,6 +76,9 @@
     <script>
         const app = Vue.createApp({
             data: () => ({
+                htmlText: '<h2>title</h2>',
+
+
                 frameworks: [
                     'vue.js',
                     'angular',
