@@ -65,8 +65,10 @@
 
 
 
-        <form>
-            <input type="text" v-model="user.name" @keydown="handleKeydown($event), logEvent($event)" />
+        <form @submit.prevent="handleSubmit">
+            <input type="text" v-model="user.name" @keydown.alt.enter="handleKeydown($event), logEvent($event)" />
+
+            <button type="submit">submit</button>
             <p>کلید: {{ key }}</p>
         </form>
         <h1>{{ user.name }}</h1>
@@ -77,16 +79,12 @@
         const app = Vue.createApp({
             data: () => ({
                 htmlText: '<h2>title</h2>',
-
-
                 frameworks: [
                     'vue.js',
                     'angular',
                     'svelete.js',
                     'react.js'
                 ],
-
-
                 styles: { 'background-color': 'red', color: 'white' },
                 url: "http://google.com/",
                 id: 'hello',
@@ -101,6 +99,9 @@
                 key: null
             }),
             methods: {
+                handleSubmit(event) {
+                    console.log('form submit: ', this.user.name);
+                },
                 handleKeydown: function(event) {
                     this.key = event.key;
                 },
