@@ -63,10 +63,12 @@
         <p v-show="isVue">first application</p>
 
 
+        <p>app input: 
+            <input type="text" v-model="app" /></p>
 
 
         <form @submit.prevent="handleSubmit">
-            <input type="text" v-model="fullName" />
+            <input type="text" v-model="user.name" />
 
             <button type="submit">submit</button>
             <h2>user full name: {{ fullName }}</h2>
@@ -99,6 +101,17 @@
                 },
                 key: null
             }),
+
+            watch: {
+                app(newValue, oldValue) {
+                    console.log('old value: ', oldValue);
+                    console.log('new value: ', newValue);
+                },
+                fullName(newFullName, oldFullName) {
+                    console.log('old value: ', newFullName);
+                    console.log('new value: ', oldFullName);
+                }
+            },
 
             computed: {
                 fullName: {
