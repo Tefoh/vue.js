@@ -29,10 +29,10 @@
 
         <p>js frameworks</p>
         <ul>
-            <template v-for="(framework, index) in frameworks" 
+            <template v-for="(framework, index) in upperFrameworks" 
                 :key="framework"
             >
-                <li v-if="framework !== 'react.js'">{{ index + 1 }} - {{ framework }}</li>
+                <li v-if="framework !== 'REACT.JS'">{{ index + 1 }} - {{ framework }}</li>
             </template>
         </ul>
 
@@ -66,10 +66,10 @@
 
 
         <form @submit.prevent="handleSubmit">
-            <input type="text" v-model="user.name" @keydown.alt.enter="handleKeydown($event), logEvent($event)" />
+            <input type="text" v-model="fullName" />
 
             <button type="submit">submit</button>
-            <p>کلید: {{ key }}</p>
+            <h2>user full name: {{ fullName }}</h2>
         </form>
         <h1>{{ user.name }}</h1>
     </div>
@@ -94,10 +94,29 @@
                 text: null,
                 user: {
                     name: "ali",
+                    last: 'ahmadi',
                     legs: 'two'
                 },
                 key: null
             }),
+
+            computed: {
+                fullName: {
+                    get() {
+                        return this.user.name + ' ' + this.user.last;
+                    },
+                    set(newValue) {
+                        const fullName = newValue.split(' ');
+                        this.user.name = fullName[0];
+                        this.user.last = fullName[1];
+                    }
+                },
+                upperFrameworks() {
+                    return this.frameworks.map(framework => framework.toUpperCase())
+                }
+            },
+
+
             methods: {
                 handleSubmit(event) {
                     console.log('form submit: ', this.user.name);
