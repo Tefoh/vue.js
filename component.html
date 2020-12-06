@@ -7,10 +7,11 @@
 </head>
 <body>
     <div id="root">
-        <base-counter />
-        <base-counter />
-        <base-counter />
-        <base-counter />
+        <base-counter></base-counter>
+        <base-counter></base-counter>
+        <base-counter></base-counter>
+        <base-counter></base-counter>
+        <base-counter></base-counter>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -18,7 +19,11 @@
         const app = Vue.createApp({});
 
         app.component('BaseCounter', {
-            template: '<button @click="counter++">Counter: {{ counter }}</button>',
+            template: `
+                <button @click="counter++">
+                    Counter: {{ counter }}
+                </button>
+            `,
             data() {
                 return {
                     counter: 0
