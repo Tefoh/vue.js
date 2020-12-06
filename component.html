@@ -7,11 +7,7 @@
 </head>
 <body>
     <div id="root">
-        <base-counter></base-counter>
-        <base-counter></base-counter>
-        <base-counter></base-counter>
-        <base-counter></base-counter>
-        <base-counter></base-counter>
+        <base-counter text="Counter:" :number="5"></base-counter>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -21,15 +17,16 @@
         app.component('BaseCounter', {
             template: `
                 <button @click="counter++">
-                    Counter: {{ counter }}
+                    {{ text }} {{ counter }}
                 </button>
             `,
+            props: ['text', 'number'],
             data() {
                 return {
-                    counter: 0
+                    counter: this.number
                 }
             }
-        })
+        });
 
         app.mount('#root');
     </script>
