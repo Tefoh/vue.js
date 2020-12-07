@@ -11,7 +11,7 @@
         <base-counter 
             text="Counter:" 
             :number="num"
-            @click="num++"
+            @inc="plusNumber"
         ></base-counter>
     </div>
 
@@ -20,16 +20,29 @@
         const app = Vue.createApp({
             data: () => ({
                 num: 3
-            })
+            }),
+            methods: {
+                plusNumber(number) {
+                    this.num += number;
+                }
+            }
         });
 
         app.component('BaseCounter', {
             template: `
-                <button>
-                    {{ text }} {{ number }}
-                </button>
+                <div>
+                    <span>{{ text }} {{ number }}</span>
+                    <button @click="inc">
+                        add
+                    </button>
+                </div>
             `,
-            props: ['text', 'number']
+            props: ['text', 'number'],
+            methods: {
+                inc() {
+                    this.$emit('inc', 3);
+                }
+            }
         });
 
         app.mount('#root');
