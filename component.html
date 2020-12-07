@@ -8,11 +8,14 @@
 <body>
     <div id="root">
         <p>عدد: {{ num }}</p>
-        <base-counter 
-            text="Counter:" 
-            :number="num"
-            @inc="plusNumber"
-        ></base-counter>
+        <base-counter @inc="plusNumber">
+            <p>Hello</p>
+            <span>Counter: {{ num }}</span>
+
+            <template v-slot:btn-text>
+                اضافه
+            </template>
+        </base-counter>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -31,13 +34,12 @@
         app.component('BaseCounter', {
             template: `
                 <div>
-                    <span>{{ text }} {{ number }}</span>
+                    <slot></slot>
                     <button @click="inc">
-                        add
+                        <slot name="btn-text"></slot>
                     </button>
                 </div>
             `,
-            props: ['text', 'number'],
             methods: {
                 inc() {
                     this.$emit('inc', 3);
