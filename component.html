@@ -7,25 +7,29 @@
 </head>
 <body>
     <div id="root">
-        <base-counter text="Counter:" :number="5"></base-counter>
+        <p>عدد: {{ num }}</p>
+        <base-counter 
+            text="Counter:" 
+            :number="num"
+            @click="num++"
+        ></base-counter>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
     <script>
-        const app = Vue.createApp({});
+        const app = Vue.createApp({
+            data: () => ({
+                num: 3
+            })
+        });
 
         app.component('BaseCounter', {
             template: `
-                <button @click="counter++">
-                    {{ text }} {{ counter }}
+                <button>
+                    {{ text }} {{ number }}
                 </button>
             `,
-            props: ['text', 'number'],
-            data() {
-                return {
-                    counter: this.number
-                }
-            }
+            props: ['text', 'number']
         });
 
         app.mount('#root');
