@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webamooz Todo-list</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>تودولیست وب آموز</h1>
+            <input type="text" placeholder="تودو" v-model="input" />
+            <button class="addBtn" @click="addTodo">اضافه کردن به لیست</button>
+        </div>
+        <ul>
+            <todo-item 
+                v-for="(todo, index) in todos"
+                :key="todo.text"
+                :todo="todo"
+                @checked="todo.completed = !todo.completed"
+                @todo-deleted="deleteTodo(index)"
+            ></todo-item>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data: () => ({
+                input: '',
+                todos: [
+                    { text: 'first todo', completed: false },
+                    { text: 'second todo', completed: false }
+                ]
+            }),
+            methods: {
+                addTodo() {
+                    if(! this.input) return;
+
+                    this.todos.push({ text: this.input, completed: false });
+                    this.input = '';
+                },
+                deleteTodo(index) {
+                    this.todos.splice(index, 1);
+                }
+            }
+        });
+
+        app.component('TodoItem', {
+            template: `
+                <li
+                    @click="$emit('checked')"
+                    :class="{ 'checked': todo.completed }"
+                >
+                    {{ todo.text }} 
+                    <button class="close" @click="$emit('todo-deleted')">X</button>
+                </li>
+            `,
+            props: ['todo']
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
