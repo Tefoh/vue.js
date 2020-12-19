@@ -7,11 +7,20 @@
 </head>
 <body>
     <h1>hello vite</h1>
+    <div id="app">
+        <p>{{ application }}</p>
+    </div>
 
     <script type="module">
-        import main from './main.js'
+        import { createApp } from 'https://unpkg.com/vue@3.0.4/dist/vue.esm-browser.js'
 
-        console.log(main.salam)
+        createApp({
+            data() {
+                return {
+                    application: 'module'
+                }
+            }
+        }).mount('#app');
     </script>
 </body>
 </html>
