@@ -14,15 +14,22 @@
     <BaseInput disabled />
     <BaseInput icon="eye" type="email" @click="handleClick" /> -->
 
-    <BaseInput v-model="name" />
+    <!-- <BaseInput v-model="name" />
     <BaseInput type="email" v-model="email" />
-    <BaseInput type="password" v-model="password" />
+    <BaseInput type="password" v-model="password" /> -->
+
+    <BaseSelect class="salam" :items="data" v-model.number="selecedUser" />
+    <!-- <BaseSelect color="danger" size="large" />
+    <BaseSelect icon="globe" />
+    <BaseSelect color="info" rounded />
+    <BaseSelect /> -->
   </div>
 </template>
 
 <script>
 import BaseButton from './components/BaseButton.vue';
 import BaseInput from './components/BaseInput.vue';
+import BaseSelect from './components/BaseSelect.vue';
 
 export default {
   name: 'App',
@@ -31,12 +38,20 @@ export default {
       isLoading: false,
       name: 'tofiq',
       email: 'tefo@gmail.com',
-      password: ''
+      password: '',
+      data: [
+        { key: 1, value: 'user 1' },
+        { key: 2, value: 'user 2' },
+        { key: 3, value: 'user 3' },
+        { key: 4, value: 'user 4' },
+      ],
+      selecedUser: 3
     }
   },
   components: {
     BaseButton,
-    BaseInput
+    BaseInput,
+    BaseSelect
   },
   methods: {
     handleClick() {
