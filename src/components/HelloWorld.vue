@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watchEffect } from 'vue';
 
 export default {
   name: 'HelloWorld',
@@ -33,6 +33,29 @@ export default {
       }
     })
     fullName.value = 'ali mohammadi';
+
+
+
+    watchEffect((onInvalidate) => {
+      console.log('count', count.value);
+
+      // const fetching = 
+
+      // DOM and template refs
+
+      onInvalidate(() => {
+        // side effect
+        // fetching.cancel()
+      })
+    });
+
+
+    // const stopWatchEffect = watchEffect(() => {
+    //   console.log('count', count.value)
+    // });
+
+    // stopWatchEffect()
+
 
     // function handleClick() {
     //   count.value++;
