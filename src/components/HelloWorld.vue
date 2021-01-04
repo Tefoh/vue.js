@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watchEffect } from 'vue';
+import { ref, reactive, computed, watchEffect, watch } from 'vue';
 
 export default {
   name: 'HelloWorld',
@@ -32,11 +32,10 @@ export default {
         user.last = last;
       }
     })
-    fullName.value = 'ali mohammadi';
 
 
 
-    watchEffect((onInvalidate) => {
+    /* watchEffect((onInvalidate) => {
       console.log('count', count.value);
 
       // const fetching = 
@@ -47,7 +46,25 @@ export default {
         // side effect
         // fetching.cancel()
       })
-    });
+    }); */
+
+    watch(
+      count, 
+      (newCount, oldCount) => {
+        console.log('new value: ', newCount);
+        console.log('old value: ', oldCount);
+      }
+    )
+
+    watch(
+      () => user.last, 
+      (newUserLast, oldUserLast) => {
+        console.log('new value: ', newUserLast);
+        console.log('old value: ', oldUserLast);
+      }
+    )
+    fullName.value = 'ali mohammadi';
+
 
 
     // const stopWatchEffect = watchEffect(() => {
@@ -85,19 +102,12 @@ export default {
   //     msg: 'Hello Vue 3.0 + Vite'
   //   }
   // }
-  /* computed: {
-    fullName: {
-      get() {
-        return this.user.name + ' ' + this.user.last;
-      },
-      set(newValue) {
-        const fullName = newValue.split(' ');
-        this.user.name = fullName[0];
-        this.user.last = fullName[1];
-      }
-    },
-    upperFrameworks: function() {
-      return this.frameworks.map(framework => framework.toUpperCase())
+  
+  /* 
+  watch: {
+    fullName(newFullName, oldFullName) {
+      console.log('old value: ', newFullName);
+      console.log('new value: ', oldFullName);
     }
   }, */
 }
