@@ -1,10 +1,11 @@
 <template>
   <h1>{{ msg }}</h1>
   <button @click="handleClick">count is: {{ count }}</button>
+  <h1>{{ user.name }}</h1>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 
 export default {
   name: 'HelloWorld',
@@ -14,7 +15,9 @@ export default {
     const msg = 'Hello Vue 3.0 + Vite';
     const count = ref(5);
 
-    console.log(count)
+    const user = reactive({ name: 'tofiq' });
+
+    console.log(user.name);
 
     // function handleClick() {
     //   count.value++;
@@ -28,6 +31,7 @@ export default {
     return {
       msg,
       count,
+      user,
       handleClick
     }
   }
