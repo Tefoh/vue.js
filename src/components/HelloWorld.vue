@@ -1,25 +1,39 @@
 <template>
   <h1>{{ msg }}</h1>
-  <button @click="count++">count is: {{ count }}</button>
+  <button @click="handleClick">count is: {{ count }}</button>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   name: 'HelloWorld',
 
   setup() {
 
     const msg = 'Hello Vue 3.0 + Vite';
-    const count = 0;
+    const count = ref(5);
 
-    console.log(msg)
+    console.log(count)
+
+    // function handleClick() {
+    //   count.value++;
+    //   this
+    // }
+    const handleClick = () => {
+      count.value++;
+    }
 
 
     return {
       msg,
-      count
+      count,
+      handleClick
     }
   }
+
+  // beforeCreate()
+  // created
 
   // data() {
   //   return {
