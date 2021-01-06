@@ -16,13 +16,6 @@ export default {
 
     const btn = ref(null);
 
-    onMounted(() => {
-      setTimeout(() => {
-        
-        console.log(btn.value.click())
-      }, 2000);
-    });
-
     return {
       showComponent,
       btn

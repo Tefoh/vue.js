@@ -1,7 +1,7 @@
 <template>
   <h1>{{ message }}</h1>
   <button @click="handleClick">count is: {{ count }}</button>
-  <h1>{{ fullName }}</h1>
+  <h1>{{ last }}</h1>
   <h1 v-for="framework in upperFrameworks" :key="framework">{{ framework }}</h1>
 </template>
 
@@ -14,6 +14,8 @@ import { ref,
         onMounted,
         onBeforeUnmount,
         onBeforeMount,
+        toRef,
+        toRefs,
 } from 'vue';
 
 export default {
@@ -47,6 +49,13 @@ export default {
     const count = ref(5);
 
     const user = reactive({ name: 'tofiq', last: 'hamzai' });
+
+    const userRef = toRefs(user);
+
+    console.log(userRef)
+
+
+
     const frameworks = reactive(['vue.js', 'angular']);
 
     const upperFrameworks = computed(() => frameworks.map(framework => framework.toUpperCase()));
@@ -120,6 +129,7 @@ export default {
       msg,
       count,
       user,
+      ...toRefs(user),
       upperFrameworks,
       fullName,
       handleClick
