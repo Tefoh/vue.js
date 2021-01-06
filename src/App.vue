@@ -1,17 +1,41 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <button @click="showComponent = false">destroy heloo world component</button>
+  <button @click="showComponent = false" ref="btn">destroy heloo world component</button>
   <HelloWorld message="hello from parent component" v-if="showComponent" />
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import { ref, onMounted } from 'vue'
 
 export default {
   name: 'App',
-  data: () => ({
-    showComponent: true
-  }),
+
+  setup() {
+    const showComponent = ref(true);
+
+    const btn = ref(null);
+
+    onMounted(() => {
+      setTimeout(() => {
+        
+        console.log(btn.value.click())
+      }, 2000);
+    });
+
+    return {
+      showComponent,
+      btn
+    }
+  },
+
+  // mounted() {
+  //   console.log(this.$refs.btn)
+  // },
+
+  // data: () => ({
+  //   showComponent: true
+  // }),
   components: {
     HelloWorld
   }
