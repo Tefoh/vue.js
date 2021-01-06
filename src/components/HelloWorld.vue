@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>{{ message }}</h1>
   <button @click="handleClick">count is: {{ count }}</button>
   <h1>{{ fullName }}</h1>
   <h1 v-for="framework in upperFrameworks" :key="framework">{{ framework }}</h1>
@@ -11,7 +11,11 @@ import { ref, reactive, computed, watchEffect, watch } from 'vue';
 export default {
   name: 'HelloWorld',
 
-  setup() {
+  props: ['message'],
+
+  setup(props, { emit, attrs }) {
+
+    // console.log(context)
 
     const msg = 'Hello Vue 3.0 + Vite';
     const count = ref(5);
@@ -51,16 +55,19 @@ export default {
     watch(
       count, 
       (newCount, oldCount) => {
-        console.log('new value: ', newCount);
-        console.log('old value: ', oldCount);
+        // console.log('new value: ', newCount);
+        // console.log('old value: ', oldCount);
+        
+
+        emit('count', { newCount, oldCount })
       }
     )
 
     watch(
       () => user.last, 
       (newUserLast, oldUserLast) => {
-        console.log('new value: ', newUserLast);
-        console.log('old value: ', oldUserLast);
+        // console.log('new value: ', newUserLast);
+        // console.log('old value: ', oldUserLast);
       }
     )
     fullName.value = 'ali mohammadi';

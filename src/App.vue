@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld />
+  <HelloWorld message="hello from parent component" />
 </template>
 
 <script>
