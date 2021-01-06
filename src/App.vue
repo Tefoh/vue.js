@@ -1,6 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld message="hello from parent component" />
+  <button @click="showComponent = false">destroy heloo world component</button>
+  <HelloWorld message="hello from parent component" v-if="showComponent" />
 </template>
 
 <script>
@@ -8,6 +9,9 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data: () => ({
+    showComponent: true
+  }),
   components: {
     HelloWorld
   }

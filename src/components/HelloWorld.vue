@@ -6,16 +6,42 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watchEffect, watch } from 'vue';
+import { ref,
+        reactive,
+        computed,
+        watchEffect,
+        watch,
+        onMounted,
+        onBeforeUnmount,
+        onBeforeMount,
+} from 'vue';
 
 export default {
   name: 'HelloWorld',
 
   props: ['message'],
 
+  // created() {
+  //   // fetch
+  // },
+  // mounted() {},
+  // beforeUnmount() {},
+
   setup(props, { emit, attrs }) {
 
     // console.log(context)
+
+    // beforeCreate, created
+    console.log('component created')
+
+    // mounted
+    onMounted(() => {
+      console.log('component mounted')
+    })
+    // beforeUnmount
+    onBeforeUnmount(() => {
+      console.log('component destroyed')
+    })
 
     const msg = 'Hello Vue 3.0 + Vite';
     const count = ref(5);
