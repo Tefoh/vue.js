@@ -1,7 +1,7 @@
 <template>
   <h1>{{ message }}</h1>
   <button @click="handleClick">count is: {{ count }}</button>
-  <h1>{{ name + ' ' + last }}</h1>
+  <h1>{{ fullName }}</h1>
   <h1 v-for="framework in upperFrameworks" :key="framework">{{ framework }}</h1>
 </template>
 
@@ -21,7 +21,7 @@ import { ref,
 import userComposable from '../composable/user.composable';
 
 export default {
-  name: 'HelloWorld',
+  name: 'WorldHello',
 
   props: ['message'],
 
@@ -32,15 +32,12 @@ export default {
   // beforeUnmount() {},
 
   setup(props, { emit, attrs }) {
-    const count = ref(5);
 
-    const { user, fullName, handleClick } = userComposable(count)
+    const count = ref(7);
 
     const msg = 'Hello Vue 3.0 + Vite';
-   
     
 
-    const userRef = toRefs(user);
 
 
     const frameworks = reactive(['vue.js', 'angular']);
@@ -59,14 +56,13 @@ export default {
     )
 
 
+
+
     return {
       msg,
       count,
-      user,
-      ...toRefs(user),
       upperFrameworks,
-      fullName,
-      handleClick
+      ...userComposable(count)
     }
   },
 
