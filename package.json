@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "vue": "^3.0.5"
   },
