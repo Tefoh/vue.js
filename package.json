@@ -8,7 +8,8 @@
   "dependencies": {
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
-    "vue": "^3.0.5"
+    "vue": "^3.0.5",
+    "vue-sweetalert2": "^4.1.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.0.4",
