@@ -5,46 +5,64 @@
   <p>
     {{ text }}
   </p>
+  <button @click="getUserData">get user info from file</button>
+  <p>اسم کاربر: {{ user.name }}</p>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from "vue";
 
 export default {
-  name: 'HelloWorld',
-  props: ['msg'],
-
+  name: "HelloWorld",
+  props: ["msg"],
+/* 
   setup() {
-    const text = ref('خالی');
+    const text = ref("خالی");
+    const user = reactive({ legs: 2 });
 
     const handleClick = () => {
-
-      fetch('/text.txt')
-        .then(response => response.text())
-        .then(message => text.value = message);
+      fetch("/text.txt")
+        .then((response) => response.text())
+        .then((message) => (text.value = message));
     };
+
+    const getUserData = () => {
+      fetch('/user.json')
+        .then(res => res.json())
+        .then(data => Object.assign(user, data))
+      
+      // console.log('user fetching...')
+    }
 
     return {
       text,
-      handleClick
+      user,
+      handleClick,
+      getUserData
     };
-  }
+  }, */
 
-  // data: () => ({
-  //   text: 'empty'
-  // }),
-  // methods: {
-  //   handleClick() {
-  //     fetch('/text.txt')
-  //       .then(response => {
-  //         return response.text();
-  //       })
-  //       .then(message => {
-  //         this.text = message
-  //       })
-  //   }
-  // }
-}
+  data: () => ({
+    text: 'empty',
+    user: {}
+  }),
+  methods: {
+    handleClick() {
+      fetch('/text.txt')
+        .then(response => {
+          return response.text();
+        })
+        .then(message => {
+          this.text = message
+        })
+    },
+    getUserData() {
+      fetch('/user.json')
+        .then(res => res.json())
+        .then(data => this.user = data)
+    }
+  }
+};
 </script>
 
 <style scoped>
