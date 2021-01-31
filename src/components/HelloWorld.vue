@@ -1,12 +1,10 @@
 <template>
   <h1>{{ msg }}</h1>
 
-  <button @click="handleClick">get text from file</button>
-  <p>
-    {{ text }}
+  <button @click="getPosts">get posts from jsonplaceholder</button>
+  <p v-for="post in posts" :key="post.id">
+    {{ post.id }} post : {{ post.title }}
   </p>
-  <button @click="getUserData">get user info from file</button>
-  <p>اسم کاربر: {{ user.name }}</p>
 </template>
 
 <script>
@@ -15,53 +13,33 @@ import { ref, reactive } from "vue";
 export default {
   name: "HelloWorld",
   props: ["msg"],
-/* 
+
   setup() {
-    const text = ref("خالی");
-    const user = reactive({ legs: 2 });
+    const posts = reactive([]);
 
-    const handleClick = () => {
-      fetch("/text.txt")
-        .then((response) => response.text())
-        .then((message) => (text.value = message));
-    };
-
-    const getUserData = () => {
-      fetch('/user.json')
-        .then(res => res.json())
-        .then(data => Object.assign(user, data))
+    const getPosts = () => {
       
-      // console.log('user fetching...')
+      fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(res => res.json())
+        .then(data => posts.push(...data))
     }
 
     return {
-      text,
-      user,
-      handleClick,
-      getUserData
+      posts,
+      getPosts
     };
-  }, */
+  },
 
-  data: () => ({
-    text: 'empty',
-    user: {}
+  /* data: () => ({
+    posts: []
   }),
   methods: {
-    handleClick() {
-      fetch('/text.txt')
-        .then(response => {
-          return response.text();
-        })
-        .then(message => {
-          this.text = message
-        })
-    },
-    getUserData() {
-      fetch('/user.json')
+    getPosts() {
+      fetch('https://jsonplaceholder.typicode.com/posts')
         .then(res => res.json())
-        .then(data => this.user = data)
+        .then(data => this.posts = data)
     }
-  }
+  } */
 };
 </script>
 
