@@ -1,7 +1,7 @@
 <template>
   <h1>{{ msg }}</h1>
 
-  <button @click="getPosts">get posts from jsonplaceholder</button>
+  <button class="btn btn-primary" @click="getPosts">get posts from jsonplaceholder</button>
   <p v-for="post in posts" :key="post.id">
     {{ post.id }} post : {{ post.title }}
   </p>
