@@ -7,25 +7,24 @@
       <div class="card-body">
         <h5 class="card-title">پست شماره {{ post.id }}</h5>
         <p class="card-text">{{ post.title }}</p>
-        <a href="#" class="btn btn-primary">بیشتر</a>
+        <button class="btn btn-primary" @click="showPostModal(post.id)">بیشتر</button>
       </div>
     </div>
   </div>
-
-  <button type="button" class="btn btn-primary" @click="showModal">
-    Launch demo modal
-  </button>
 
   <!-- Modal -->
   <div class="modal fade" ref="exampleModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{ post.title }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <h3>توضیحات: </h3>
+          <p>{{ post.body }}</p>
+          <h4>نویسنده: </h4>
+          <p>{{ user.name }}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -44,8 +43,10 @@ export default {
   name: "HelloWorld",
   props: ["msg"],
 
-  setup() {
+  /* setup() {
     const posts = reactive([]);
+    const post = reactive({ title: '', body: '' })
+    const user = reactive({})
     const exampleModal = ref(null);
     const modal = ref(null);
 
@@ -56,8 +57,18 @@ export default {
         .then(data => posts.push(...data))
     }
 
-    const showModal = () => {
-      modal.value.show();
+    const showPostModal = (id) => {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          Object.assign(post, data)
+          fetch(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
+            .then(res => res.json())
+            .then(data => {
+              Object.assign(user, data)
+              modal.value.show();
+            })
+        })
     }
 
     onMounted(() => {
@@ -66,14 +77,18 @@ export default {
 
     return {
       posts,
+      post,
+      user,
       getPosts,
       exampleModal,
-      showModal
+      showPostModal,
     };
-  },
+  }, */
 
-  /* data: () => ({
+  data: () => ({
     posts: [],
+    post: {},
+    user: {},
     modal: null
   }),
   methods: {
@@ -82,13 +97,24 @@ export default {
         .then(res => res.json())
         .then(data => this.posts = data)
     },
-    showModal() {
-      this.modal.show()
+    showPostModal(id) {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          this.post = data
+
+          fetch(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
+            .then(res => res.json())
+            .then(data => {
+              this.user = data
+              this.modal.show()
+            })
+        })
     }
   },
   mounted() {
     this.modal = new Modal(this.$refs.exampleModal)
-  } */
+  }
 };
 </script>
 
