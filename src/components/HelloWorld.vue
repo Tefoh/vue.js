@@ -2,6 +2,7 @@
   <h1>{{ msg }}</h1>
 
   <button class="btn btn-primary" @click="getPosts">get posts from jsonplaceholder</button>
+  <p class="alert alert-danger" v-if="errorText">{{ errorText }}</p>
   <div class="row">
     <div class="card" style="width: 18rem;" v-for="post in posts" :key="post.id">
       <div class="card-body">
@@ -86,30 +87,44 @@ export default {
   }, */
 
   data: () => ({
-    posts: [],
+    posts: null,
     post: {},
     user: {},
-    modal: null
+    modal: null,
+    errorText: ''
   }),
   methods: {
+    handleError(res) {
+      if (! res.ok) {
+        throw new Error('اررور داشتیم')
+      }
+
+      return res;
+    },
     getPosts() {
       fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(this.handleError)
         .then(res => res.json())
         .then(data => this.posts = data)
+        .catch(error => this.errorText = error.message)
     },
     showPostModal(id) {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      fetch(`https://jsonplaceholder.typicode.com/fghfgh/${id}`)
+        .then(this.handleError)
         .then(res => res.json())
         .then(data => {
           this.post = data
 
           fetch(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
+            .then(this.handleError)
             .then(res => res.json())
             .then(data => {
               this.user = data
               this.modal.show()
             })
+            .catch(error => this.errorText = error.message)
         })
+        .catch(error => this.errorText = error.message)
     }
   },
   mounted() {
