@@ -1,7 +1,17 @@
 <template>
   <h1>{{ msg }}</h1>
+  <form @submit.prevent="sendForm">
+    <div class="mb-3">
+      <label for="title" class="form-label">عنوان پست</label>
+      <input type="text" class="form-control" id="title" v-model="postForm.title" />
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">متن پست</label>
+      <textarea class="form-control" id="body" rows="3" v-model="postForm.body"></textarea>
+    </div>
+    <button class="btn btn-info" type="submit">ارسال فرم</button>
+  </form>
 
-  <button class="btn btn-primary" @click="getPosts">get posts from jsonplaceholder</button>
   <p class="alert alert-danger" v-if="errorText">{{ errorText }}</p>
   <div class="row">
     <div class="card" style="width: 18rem;" v-for="post in posts" :key="post.id">
@@ -44,33 +54,74 @@ export default {
   name: "HelloWorld",
   props: ["msg"],
 
-  /* setup() {
+  setup() {
     const posts = reactive([]);
     const post = reactive({ title: '', body: '' })
+    const postForm = reactive({ title: '', body: '', userId: 2 })
     const user = reactive({})
+    const errorText = ref('');
     const exampleModal = ref(null);
     const modal = ref(null);
+
+    const handleError = (res) => {
+      if (! res.ok) {
+        throw new Error('اررور داشتیم')
+      }
+
+      return res;
+    }
 
     const getPosts = () => {
       
       fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(handleError)
         .then(res => res.json())
         .then(data => posts.push(...data))
+        .catch(error => errorText.value = error.message)
     }
 
     const showPostModal = (id) => {
       fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(handleError)
         .then(res => res.json())
         .then(data => {
           Object.assign(post, data)
           fetch(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
+            .then(handleError)
             .then(res => res.json())
             .then(data => {
               Object.assign(user, data)
               modal.value.show();
             })
+            .catch(error => errorText.value = error.message)
         })
+        .catch(error => errorText.value = error.message)
     }
+
+    const sendForm = () => {
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json; charset: utf-8;'
+        },
+        body: JSON.stringify(postForm)
+      })
+      .then(handleError)
+      .then(res => res.json())
+      .then(data => {
+        posts.push({
+          id: data.id,
+
+          ...postForm
+        })
+
+        postForm.title = ''
+        postForm.body = ''
+      })
+      .catch(error => errorText.value = error.message)
+    }
+
+    getPosts()
 
     onMounted(() => {
       modal.value = new Modal(exampleModal.value)
@@ -79,14 +130,16 @@ export default {
     return {
       posts,
       post,
+      postForm,
+      sendForm,
       user,
-      getPosts,
       exampleModal,
       showPostModal,
+      errorText
     };
-  }, */
+  },
 
-  data: () => ({
+  /* data: () => ({
     posts: null,
     post: {},
     user: {},
@@ -129,7 +182,7 @@ export default {
   },
   mounted() {
     this.modal = new Modal(this.$refs.exampleModal)
-  }
+  } */
 };
 </script>
 
