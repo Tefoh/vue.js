@@ -1,6 +1,6 @@
 <template>
   <h1>{{ msg }}</h1>
-  <form @submit.prevent="sendForm">
+  <form @submit.prevent="isUpdating ? updatePostForm() : savePostForm()">
     <div class="mb-3">
       <label for="title" class="form-label">عنوان پست</label>
       <input type="text" class="form-control" id="title" v-model="postForm.title" />
@@ -9,7 +9,7 @@
       <label for="body" class="form-label">متن پست</label>
       <textarea class="form-control" id="body" rows="3" v-model="postForm.body"></textarea>
     </div>
-    <button class="btn btn-info" type="submit">ارسال فرم</button>
+    <button class="btn btn-success" type="submit">{{ isUpdating ? 'ویرایش پست' : 'ذخیره پست'}}</button>
   </form>
 
   <p class="alert alert-danger" v-if="errorText">{{ errorText }}</p>
@@ -18,7 +18,9 @@
       <div class="card-body">
         <h5 class="card-title">پست شماره {{ post.id }}</h5>
         <p class="card-text">{{ post.title }}</p>
-        <button class="btn btn-primary" @click="showPostModal(post.id)">بیشتر</button>
+        <p class="card-text">{{ post.body }}</p>
+        <button class="me-2 btn btn-primary" @click="showPostModal(post.id)">بیشتر</button>
+        <button class="btn btn-primary" @click="fetchUpdatePost(post.id)">ویرایش</button>
       </div>
     </div>
   </div>
@@ -58,6 +60,7 @@ export default {
     const posts = reactive([]);
     const post = reactive({ title: '', body: '' })
     const postForm = reactive({ title: '', body: '', userId: 2 })
+    const isUpdating = ref(false);
     const user = reactive({})
     const errorText = ref('');
     const exampleModal = ref(null);
@@ -98,7 +101,7 @@ export default {
         .catch(error => errorText.value = error.message)
     }
 
-    const sendForm = () => {
+    const savePostForm = () => {
       fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'post',
         headers: {
@@ -121,6 +124,46 @@ export default {
       .catch(error => errorText.value = error.message)
     }
 
+    const fetchUpdatePost = id => {
+      isUpdating.value = true;
+
+      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(handleError)
+        .then(res => res.json())
+        .then(data => {
+          postForm.id = data.id
+          postForm.title = data.title
+          postForm.body = data.body
+          postForm.userId = data.userId
+        })
+        .catch(error => errorText.value = error.message)
+    }
+
+    const updatePostForm = () => {
+
+      fetch(`https://jsonplaceholder.typicode.com/posts/${postForm.id}`, {
+        method: 'put',
+        headers: {
+          'Content-type': 'application/json; charset: utf-8;'
+        },
+        body: JSON.stringify(postForm)
+      })
+      .then(handleError)
+      .then(res => res.json())
+      .then(data => {
+        posts.map(post => {
+          if (post.id === postForm.id) {
+            post.title = postForm.title
+            post.body = postForm.body
+          }
+        })
+
+        postForm.title = ''
+        postForm.body = ''
+      })
+      .catch(error => errorText.value = error.message)
+    }
+
     getPosts()
 
     onMounted(() => {
@@ -131,11 +174,14 @@ export default {
       posts,
       post,
       postForm,
-      sendForm,
+      savePostForm,
       user,
       exampleModal,
       showPostModal,
-      errorText
+      errorText,
+      fetchUpdatePost,
+      isUpdating,
+      updatePostForm
     };
   },
 
