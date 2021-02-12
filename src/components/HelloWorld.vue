@@ -3,21 +3,22 @@
   <PostForm
     @post-saved="savePostForm"
     @post-updated="updatePostForm"
+    @error="(message) => errorText = message"
     :data="postForm"
   />
 
   <p class="alert alert-danger" v-if="errorText">{{ errorText }}</p>
   <div class="row">
-    <div class="card" style="width: 18rem;" v-for="(post, index) in posts" :key="post.id">
-      <div class="card-body">
-        <h5 class="card-title">پست شماره {{ post.id }}</h5>
-        <p class="card-text">{{ post.title }}</p>
-        <p class="card-text">{{ post.body }}</p>
-        <button class="me-2 btn btn-primary" @click="showPostModal(post.id)">بیشتر</button>
-        <button class="me-2 btn btn-primary" @click="fetchUpdatePost(post.id)">ویرایش</button>
-        <button class="btn btn-danger" @click="deletePost(post.id, index)">X</button>
-      </div>
-    </div>
+    <PostCard
+      v-for="(post, index) in posts"
+      :key="post.id"
+      :post="post"
+      :index="index"
+      @error="(message) => errorText = message"
+      @show-modal="showPostModal"
+      @show-update="fetchUpdatePost"
+      @post-deleted="deletePost"
+    />
   </div>
 
   <!-- Modal -->
@@ -47,13 +48,15 @@
 import { ref, reactive, onMounted } from "vue";
 import { Modal } from 'bootstrap'
 import PostForm from './PostForm.vue'
+import PostCard from './PostCard.vue'
 
 export default {
   name: "HelloWorld",
   props: ["msg"],
 
   components: {
-    PostForm
+    PostForm,
+    PostCard
   },
 
   setup() {
@@ -82,39 +85,21 @@ export default {
         .catch(error => errorText.value = error.message)
     }
 
-    const showPostModal = (id) => {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then(handleError)
-        .then(res => res.json())
-        .then(data => {
-          Object.assign(post, data)
-          fetch(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
-            .then(handleError)
-            .then(res => res.json())
-            .then(data => {
-              Object.assign(user, data)
-              modal.value.show();
-            })
-            .catch(error => errorText.value = error.message)
-        })
-        .catch(error => errorText.value = error.message)
+    const showPostModal = ({ postData, userData }) => {
+      Object.assign(post, postData)
+      Object.assign(user, userData)
+      modal.value.show();
     }
 
     const savePostForm = (postForm) => {
       posts.push(postForm)
     }
 
-    const fetchUpdatePost = id => {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then(handleError)
-        .then(res => res.json())
-        .then(data => {
-          postForm.id = data.id
-          postForm.title = data.title
-          postForm.body = data.body
-          postForm.userId = data.userId
-        })
-        .catch(error => errorText.value = error.message)
+    const fetchUpdatePost = data => {
+      postForm.id = data.id
+      postForm.title = data.title
+      postForm.body = data.body
+      postForm.userId = data.userId
     }
 
     const updatePostForm = (updatedPost) => {
@@ -126,17 +111,8 @@ export default {
       })
     }
 
-    const deletePost = (id, index) => {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-        method: 'delete'
-      })
-      .then(handleError)
-      .then(res => res.json())
-      .then(() => {
-        // const post = posts.find(post => post.id === id)
-        // const postIndex = posts.indexOf(post)
-        posts.splice(index, 1)
-      })
+    const deletePost = index => {
+      posts.splice(index, 1)
     }
 
     getPosts()

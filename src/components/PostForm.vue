@@ -14,7 +14,7 @@
 
 <script>
 import { reactive, ref, watch } from 'vue'
-
+import { handleError } from '../utils/helpers.js'
 export default {
   name: "PostForm",
 
@@ -29,16 +29,8 @@ export default {
     const postForm = reactive({ title: '', body: '', userId: 2 })
     const isUpdating = ref(false);
 
-    const handleError = (res) => {
-      if (! res.ok) {
-        throw new Error('اررور داشتیم')
-      }
-
-      return res;
-    }
-
     const savePost = () => {
-      fetch('https://jsonplaceholder.typicode.com/posts', {
+      fetch('https://jsonplaceholder.typicode.com/ghjghjghj', {
         method: 'post',
         headers: {
           'Content-type': 'application/json; charset: utf-8;'
@@ -53,7 +45,7 @@ export default {
         postForm.title = ''
         postForm.body = ''
       })
-      .catch(error => errorText.value = error.message)
+      .catch(error => context.emit('error', error.message))
     }
 
     const updatePost = () => {
@@ -72,7 +64,7 @@ export default {
         postForm.title = ''
         postForm.body = ''
       })
-      .catch(error => errorText.value = error.message)
+      .catch(error => context.emit('error', error.message))
     }
 
     watch(props.data, () => {
