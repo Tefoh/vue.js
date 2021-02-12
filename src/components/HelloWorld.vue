@@ -22,26 +22,7 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" ref="exampleModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ post.title }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h3>توضیحات: </h3>
-          <p>{{ post.body }}</p>
-          <h4>نویسنده: </h4>
-          <p>{{ user.name }}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <PostModal ref="exampleModal" :post="post" :user="user" />
 </template>
 
 <script>
@@ -49,6 +30,7 @@ import { ref, reactive, onMounted } from "vue";
 import { Modal } from 'bootstrap'
 import PostForm from './PostForm.vue'
 import PostCard from './PostCard.vue'
+import PostModal from './PostModal.vue'
 
 export default {
   name: "HelloWorld",
@@ -56,7 +38,8 @@ export default {
 
   components: {
     PostForm,
-    PostCard
+    PostCard,
+    PostModal
   },
 
   setup() {
@@ -117,8 +100,9 @@ export default {
 
     getPosts()
 
+
     onMounted(() => {
-      modal.value = new Modal(exampleModal.value)
+      modal.value = new Modal(exampleModal.value.$el)
     })
 
     return {
