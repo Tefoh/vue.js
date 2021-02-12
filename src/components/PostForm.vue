@@ -29,23 +29,26 @@ export default {
     const postForm = reactive({ title: '', body: '', userId: 2 })
     const isUpdating = ref(false);
 
-    const savePost = () => {
-      fetch('https://jsonplaceholder.typicode.com/ghjghjghj', {
-        method: 'post',
-        headers: {
-          'Content-type': 'application/json; charset: utf-8;'
-        },
-        body: JSON.stringify(postForm)
-      })
-      .then(handleError)
-      .then(res => res.json())
-      .then(data => {
+    const savePost = async() => {
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+          method: 'post',
+          headers: {
+            'Content-type': 'application/json; charset: utf-8;'
+          },
+          body: JSON.stringify(postForm)
+        });
+        handleError(res);
+        const data = await res.json();
+        
         context.emit('post-saved', { id: data.id, ...postForm })
 
         postForm.title = ''
         postForm.body = ''
-      })
-      .catch(error => context.emit('error', error.message))
+      } catch (error) {
+        context.emit('error', error.message)
+      }
+
     }
 
     const updatePost = () => {

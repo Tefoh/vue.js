@@ -30,23 +30,36 @@ export default {
 
   setup(props, { emit }) {
     
-    const showModal = (id) => {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then(handleError)
-        .then(res => res.json())
-        .then(data => {
-          const postData = data
-          fetch(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
-            .then(handleError)
-            .then(res => res.json())
-            .then(data => {
-              const userData = data
+    const showModal = async(id) => {
+      // fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      //   .then(handleError)
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     const postData = data
+      //     fetch(`https://jsonplaceholder.typicode.com/users/${data.userId}`)
+      //       .then(handleError)
+      //       .then(res => res.json())
+      //       .then(data => {
+      //         const userData = data
 
-              emit('show-modal', { postData, userData })
-            })
-            .catch(error => context.emit('error', error.message))
-        })
-        .catch(error => context.emit('error', error.message))
+      //         emit('show-modal', { postData, userData })
+      //       })
+      //       .catch(error => emit('error', error.message))
+      //   })
+      //   .catch(error => emit('error', error.message))
+      try {
+        const postRes = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        handleError(postRes)
+        const postData = await postRes.json()
+
+        const userRes = await fetch(`https://jsonplaceholder.typicode.com/users/${postData.userId}`)
+        handleError(userRes)
+        const userData = await userRes.json()
+
+        emit('show-modal', { postData, userData })
+      } catch(error) {
+        emit('error', error.message)
+      }
     }
     
     const UpdatePost = id => {
@@ -56,7 +69,7 @@ export default {
         .then(data => {
           emit('show-update', data)
         })
-        .catch(error => context.emit('error', error.message))
+        .catch(error => emit('error', error.message))
     }
 
     const deletePost = (id, index) => {
@@ -66,7 +79,7 @@ export default {
       .then(handleError)
       .then(res => res.json())
       .then(() => emit('post-deleted', index))
-      .catch(error => context.emit('error', error.message))
+      .catch(error => emit('error', error.message))
     }
 
     return {

@@ -31,6 +31,7 @@ import { Modal } from 'bootstrap'
 import PostForm from './PostForm.vue'
 import PostCard from './PostCard.vue'
 import PostModal from './PostModal.vue'
+import { handleError } from '../utils/helpers.js'
 
 export default {
   name: "HelloWorld",
@@ -51,21 +52,22 @@ export default {
     const exampleModal = ref(null);
     const modal = ref(null);
 
-    const handleError = (res) => {
-      if (! res.ok) {
-        throw new Error('اررور داشتیم')
+    const getPosts = async() => {
+      // fetch('https://jsonplaceholder.typicode.com/posts')
+      //   .then(handleError)
+      //   .then(res => res.json())
+      //   .then(data => posts.push(...data))
+      //   .catch(error => errorText.value = error.message)
+
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+        handleError(res)
+        const data = await res.json()
+
+        posts.push(...data)
+      } catch(error) {
+        errorText.value = error.message
       }
-
-      return res;
-    }
-
-    const getPosts = () => {
-      
-      fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(handleError)
-        .then(res => res.json())
-        .then(data => posts.push(...data))
-        .catch(error => errorText.value = error.message)
     }
 
     const showPostModal = ({ postData, userData }) => {
