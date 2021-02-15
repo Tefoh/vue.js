@@ -15,6 +15,8 @@
 <script>
 import { reactive, ref, watch } from 'vue'
 import { handleError } from '../utils/helpers.js'
+import axios from 'axios'
+
 export default {
   name: "PostForm",
 
@@ -30,44 +32,49 @@ export default {
     const isUpdating = ref(false);
 
     const savePost = async() => {
-      try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
-          method: 'post',
-          headers: {
-            'Content-type': 'application/json; charset: utf-8;'
-          },
-          body: JSON.stringify(postForm)
-        });
-        handleError(res);
-        const data = await res.json();
-        
-        context.emit('post-saved', { id: data.id, ...postForm })
 
-        postForm.title = ''
-        postForm.body = ''
-      } catch (error) {
-        context.emit('error', error.message)
-      }
+      axios.post('https://jsonplaceholder.typicode.com/posts', postForm)
+        .then(({ data }) => {
+          context.emit('post-saved', { id: data.id, ...postForm })
+
+          postForm.title = ''
+          postForm.body = ''
+        })
+        .catch(() => context.emit('error', 'اررور داشتیم'))
+
+
+
+
+      // try {
+      //   const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      //     method: 'post',
+      //     headers: {
+      //       'Content-type': 'application/json; charset: utf-8;'
+      //     },
+      //     body: JSON.stringify(postForm)
+      //   });
+      //   handleError(res);
+      //   const data = await res.json();
+        
+      //   context.emit('post-saved', { id: data.id, ...postForm })
+
+      //   postForm.title = ''
+      //   postForm.body = ''
+      // } catch (error) {
+      //   context.emit('error', error.message)
+      // }
 
     }
 
     const updatePost = () => {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${postForm.id}`, {
-        method: 'put',
-        headers: {
-          'Content-type': 'application/json; charset: utf-8;'
-        },
-        body: JSON.stringify(postForm)
-      })
-      .then(handleError)
-      .then(res => res.json())
-      .then(data => {
+      axios.put(`https://jsonplaceholder.typicode.com/posts/${postForm.id}`, postForm)
+      .then(({ data }) => {
         context.emit('post-updated', { ...postForm })
 
         postForm.title = ''
         postForm.body = ''
       })
-      .catch(error => context.emit('error', error.message))
+      .catch(error => context.emit('error', 'اررور داشتیم'))
     }
 
     watch(props.data, () => {

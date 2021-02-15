@@ -32,6 +32,7 @@ import PostForm from './PostForm.vue'
 import PostCard from './PostCard.vue'
 import PostModal from './PostModal.vue'
 import { handleError } from '../utils/helpers.js'
+import axios from 'axios'
 
 export default {
   name: "HelloWorld",
@@ -59,15 +60,23 @@ export default {
       //   .then(data => posts.push(...data))
       //   .catch(error => errorText.value = error.message)
 
-      try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-        handleError(res)
-        const data = await res.json()
+      axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(({ data }) => posts.push(...data))
+        .catch(({ response }) => {
+          console.log(response)
+          errorText.value = 'اررور داشتیم'
+        })
 
-        posts.push(...data)
-      } catch(error) {
-        errorText.value = error.message
-      }
+
+      // try {
+      //   const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      //   handleError(res)
+      //   const data = await res.json()
+
+      //   posts.push(...data)
+      // } catch(error) {
+      //   errorText.value = error.message
+      // }
     }
 
     const showPostModal = ({ postData, userData }) => {
