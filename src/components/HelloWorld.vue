@@ -54,18 +54,12 @@ export default {
     const modal = ref(null);
 
     const getPosts = async() => {
-      // fetch('https://jsonplaceholder.typicode.com/posts')
-      //   .then(handleError)
-      //   .then(res => res.json())
-      //   .then(data => posts.push(...data))
-      //   .catch(error => errorText.value = error.message)
-
-      axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(({ data }) => posts.push(...data))
-        .catch(({ response }) => {
-          console.log(response)
-          errorText.value = 'اررور داشتیم'
-        })
+      // axios.get('https://jsonplaceholder.typicode.com/posts')
+      //   .then(({ data }) => posts.push(...data))
+      //   .catch(({ response }) => {
+      //     console.log(response)
+      //     errorText.value = 'اررور داشتیم'
+      //   })
 
 
       // try {
@@ -77,6 +71,13 @@ export default {
       // } catch(error) {
       //   errorText.value = error.message
       // }
+
+      try {
+        const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts')
+        posts.push(...data)
+      } catch(error) {
+        errorText.value = 'اررور داشتیم'
+      }
     }
 
     const showPostModal = ({ postData, userData }) => {
