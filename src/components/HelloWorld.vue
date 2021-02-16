@@ -73,11 +73,8 @@ export default {
       // }
 
       try {
-        const res = await axios.get(
-          '/posts'
-        )
-        console.log(res.config)
-        posts.push(...res.data)
+        const { data } = await axios.get('/fghfghfgh')
+        posts.push(...data)
       } catch(error) {
         errorText.value = 'اررور داشتیم'
       }
