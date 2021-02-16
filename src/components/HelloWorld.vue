@@ -32,7 +32,7 @@ import PostForm from './PostForm.vue'
 import PostCard from './PostCard.vue'
 import PostModal from './PostModal.vue'
 import { handleError } from '../utils/helpers.js'
-import axios from 'axios'
+import axios from '../plugins/axios.js'
 
 export default {
   name: "HelloWorld",
@@ -73,22 +73,11 @@ export default {
       // }
 
       try {
-        const token = 'randomtoken'
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json'
-          },
-          timeout: 3000,
-          params: {
-            _limit: 10
-          }
-        };
-        const { data } = await axios.get(
-          'https://jsonplaceholder.typicode.com/posts',
-          config
+        const res = await axios.get(
+          '/posts'
         )
-        posts.push(...data)
+        console.log(res.config)
+        posts.push(...res.data)
       } catch(error) {
         errorText.value = 'اررور داشتیم'
       }

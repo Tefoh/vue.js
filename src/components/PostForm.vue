@@ -14,8 +14,7 @@
 
 <script>
 import { reactive, ref, watch } from 'vue'
-import { handleError } from '../utils/helpers.js'
-import axios from 'axios'
+import axios from '../plugins/axios.js'
 
 export default {
   name: "PostForm",
@@ -33,19 +32,7 @@ export default {
 
     const savePost = async() => {
       
-      const config = {
-        headers: {
-          Authorization: `Bearer jkdgjklnfkln`,
-          'Content-type': 'application/json'
-        },
-        timeout: 3000
-      };
-
-      axios.post(
-        'https://jsonplaceholder.typicode.com/posts',
-        postForm,
-        config
-      )
+      axios.post('/posts', postForm)
         .then((response) => {
           console.log(response)
 
@@ -81,12 +68,13 @@ export default {
     }
 
     const updatePost = () => {
-      axios.put(`https://jsonplaceholder.typicode.com/posts/${postForm.id}`, postForm)
+      axios.put(`/posts/${postForm.id}`, postForm)
       .then(({ data }) => {
-        context.emit('post-updated', { ...postForm })
+        context.emit('post-updated', { ...postForm, id: data.id })
 
         postForm.title = ''
         postForm.body = ''
+        isUpdating.value = false
       })
       .catch(error => context.emit('error', 'اررور داشتیم'))
     }
