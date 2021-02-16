@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+export const cancelToken = axios.CancelToken
+
 const axiosInstance = axios.create({
   timeout: 5000,
   baseURL: 'https://jsonplaceholder.typicode.com',

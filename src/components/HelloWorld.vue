@@ -1,5 +1,8 @@
 <template>
   <h1>{{ msg }}</h1>
+  <button class="btn btn-danger" @click="cancelRequest">لغو درخواست</button>
+
+
   <PostForm
     @post-saved="savePostForm"
     @post-updated="updatePostForm"
@@ -32,7 +35,7 @@ import PostForm from './PostForm.vue'
 import PostCard from './PostCard.vue'
 import PostModal from './PostModal.vue'
 import { handleError } from '../utils/helpers.js'
-import axios from '../plugins/axios.js'
+import axios, { cancelToken } from '../plugins/axios.js'
 
 export default {
   name: "HelloWorld",
@@ -52,28 +55,20 @@ export default {
     const errorText = ref('');
     const exampleModal = ref(null);
     const modal = ref(null);
+    const source = ref(null);
+
+    const cancelRequest = () => {
+      source.value.cancel('درخواست به درستی لغو شد')
+    }
 
     const getPosts = async() => {
-      // axios.get('https://jsonplaceholder.typicode.com/posts')
-      //   .then(({ data }) => posts.push(...data))
-      //   .catch(({ response }) => {
-      //     console.log(response)
-      //     errorText.value = 'اررور داشتیم'
-      //   })
-
-
-      // try {
-      //   const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-      //   handleError(res)
-      //   const data = await res.json()
-
-      //   posts.push(...data)
-      // } catch(error) {
-      //   errorText.value = error.message
-      // }
 
       try {
-        const { data } = await axios.get('/fghfghfgh')
+        source.value = cancelToken.source()
+
+        const { data } = await axios.get('/posts', {
+          cancelToken: source.value.token
+        })
         posts.push(...data)
       } catch(error) {
         errorText.value = 'اررور داشتیم'
@@ -118,6 +113,8 @@ export default {
     })
 
     return {
+      source,
+      cancelRequest,
       posts,
       post,
       postForm,
