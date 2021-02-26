@@ -1,5 +1,4 @@
 <template>
-  <router-link to="/about">صفحه درباره ما</router-link>
   <h1>
     اینجا صفحه اصلیست
   </h1>
