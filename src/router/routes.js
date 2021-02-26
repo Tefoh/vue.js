@@ -6,9 +6,10 @@ import Product from '../pages/Product.vue'
 import NotFound from '../pages/NotFound.vue'
 
 const routes = [
-  { path: '/home', component: Home },
-  { path: '/about', component: About },
-  { path: '/posts/:postId(\\d+)', component: Post },
+  { path: '/', component: Home, name: 'home' },
+  { path: '/about', component: About, name: 'about' },
+  { path: '/posts', component: Post, name: 'post-index' },
+  { path: '/posts/:postId(\\d+)', component: Post, name: 'posts-show' },
   { path: '/@:username', component: Profile },
   { path: '/products/:productId?', component: Product },
   { path: '/:match(.*)', component: NotFound }

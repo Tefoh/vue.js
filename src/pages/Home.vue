@@ -11,7 +11,7 @@ export default {
 
   created() {
     setTimeout(() => {
-      this.$router.push('/about')
+      this.$router.push({ name: 'about' })
       console.log(this.$route.query)
     }, 2000)
   }
