@@ -15,7 +15,8 @@ const routes = [
       {
         path: '',
         component: Home,
-        name: 'home' 
+        name: 'home',
+        alias: ['/home']
       },
       {
         path: 'about',
@@ -45,14 +46,19 @@ const routes = [
     children: [
       {
         path: '@:username', // /admin/@tofiq
-        component: Profile 
+        component: Profile,
+        alias: ['@:username/profile', ':username/posts'] // /admin/@tofiq/profile - /admin/tofiq/posts
       },
     ]
   },
   {
-    path: '/:match(.*)',
+    path: '/404',
     component: NotFound
-   }
+  },
+  {
+    path: '/:match(.*)',
+    redirect: '/404'
+  }
 ]
 
 export default routes
