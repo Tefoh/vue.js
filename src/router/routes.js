@@ -4,43 +4,50 @@ import Post from '../pages/Post.vue'
 import Profile from '../pages/Profile.vue'
 import Product from '../pages/Product.vue'
 import NotFound from '../pages/NotFound.vue'
-import Header from '../layouts/Header.vue'
+import HomeLayout from '../layouts/HomeLayout.vue'
+import AdminLayout from '../layouts/AdminLayout.vue'
 
 const routes = [
   {
     path: '/',
-    components: {
-      default: Home,
-      Header
-    },
-    name: 'home' 
+    component: HomeLayout,
+    children: [
+      {
+        path: '',
+        component: Home,
+        name: 'home' 
+      },
+      {
+        path: 'about',
+        component: About,
+        name: 'about' 
+      },
+      {
+        path: 'posts',
+        component: Post,
+        name: 'post-index' 
+      },
+      {
+        path: 'posts/:postId(\\d+)',
+        component: Post,
+        name: 'posts-show' 
+      },
+      {
+        path: 'products/:productId?',
+        component: Product,
+        name: 'products-show' 
+      },
+    ]
   },
   {
-    path: '/about',
-    components: {
-      default: About,
-      Header
-    },
-    name: 'about' 
-  },
-  {
-    path: '/posts',
-    component: Post,
-    name: 'post-index' 
-  },
-  {
-    path: '/posts/:postId(\\d+)',
-    component: Post,
-    name: 'posts-show' 
-  },
-  {
-    path: '/@:username',
-    component: Profile 
-  },
-  {
-    path: '/products/:productId?',
-    component: Product,
-    name: 'products-show' 
+    path: '/admin',
+    component: AdminLayout,
+    children: [
+      {
+        path: '@:username', // /admin/@tofiq
+        component: Profile 
+      },
+    ]
   },
   {
     path: '/:match(.*)',
