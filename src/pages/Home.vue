@@ -9,10 +9,10 @@ export default {
   name: "Home",
 
   created() {
-    setTimeout(() => {
-      this.$router.push({ name: 'about' })
-      console.log(this.$route.query)
-    }, 2000)
+    // setTimeout(() => {
+    //   this.$router.push({ name: 'about' })
+    //   console.log(this.$route.query)
+    // }, 2000)
   }
 }
 </script>

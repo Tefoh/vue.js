@@ -9,9 +9,9 @@
 <script>
 export default {
   created() {
-    setTimeout(() => {
-      this.$router.replace({ path: '/'})
-    }, 1500)
+    // setTimeout(() => {
+    //   this.$router.replace({ path: '/'})
+    // }, 1500)
   }
 }
 </script>
