@@ -1,6 +1,7 @@
 import Home from '../pages/Home.vue'
 import About from '../pages/About.vue'
 import Post from '../pages/Post.vue'
+import Login from '../pages/Login.vue'
 import Profile from '../pages/Profile.vue'
 import Product from '../pages/Product.vue'
 import NotFound from '../pages/NotFound.vue'
@@ -17,6 +18,11 @@ const routes = [
         component: Home,
         name: 'home',
         alias: ['/home']
+      },
+      {
+        path: 'auth/login',
+        component: Login,
+        name: 'login',
       },
       {
         path: 'about',
