@@ -49,7 +49,7 @@ const routes = [
         path: 'products/:productId?',
         component: Product,
         name: 'products-show',
-        beforeEnter: [auth]
+        // beforeEnter: [auth]
       },
     ]
   },
