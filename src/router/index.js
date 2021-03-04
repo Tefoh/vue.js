@@ -27,9 +27,13 @@ const router = createRouter({
 // })
 
 router.beforeResolve((to, from) => {
-  if (to.name === 'products-show') {
+
+  if (to.meta.auth) {
     return { name: 'login' }
   }
+  // if (to.meta.guest) {
+  //   return { name: 'home' }
+  // }
 
   if (to.name === 'posts-show') {
     // try {
@@ -42,8 +46,8 @@ router.beforeResolve((to, from) => {
 })
 
 
-router.afterEach((to, from, failure) => {
-  console.log({ to, from, failure })
-})
+// router.afterEach((to, from, failure) => {
+//   console.log({ to, from, failure })
+// })
 
 export default router

@@ -23,6 +23,9 @@ const routes = [
         path: 'auth/login',
         component: Login,
         name: 'login',
+        meta: {
+          guest: true
+        }
       },
       {
         path: 'about',
@@ -43,7 +46,10 @@ const routes = [
       {
         path: 'products/:productId?',
         component: Product,
-        name: 'products-show' 
+        name: 'products-show',
+        meta: {
+          auth: true
+        }
       },
     ]
   },
@@ -54,7 +60,10 @@ const routes = [
       {
         path: '@:username', // /admin/@tofiq
         component: Profile,
-        alias: ['@:username/profile', ':username/posts'] // /admin/@tofiq/profile - /admin/tofiq/posts
+        alias: ['@:username/profile', ':username/posts'], // /admin/@tofiq/profile - /admin/tofiq/posts
+        meta: {
+          auth: true
+        }
       },
     ]
   },
