@@ -8,6 +8,8 @@ import NotFound from '../pages/NotFound.vue'
 import HomeLayout from '../layouts/HomeLayout.vue'
 import AdminLayout from '../layouts/AdminLayout.vue'
 
+import auth from '../middlewares/auth.js'
+
 const routes = [
   {
     path: '/',
@@ -47,9 +49,7 @@ const routes = [
         path: 'products/:productId?',
         component: Product,
         name: 'products-show',
-        meta: {
-          auth: true
-        }
+        beforeEnter: [auth]
       },
     ]
   },

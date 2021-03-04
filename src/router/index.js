@@ -26,24 +26,24 @@ const router = createRouter({
 //   return next()
 // })
 
-router.beforeResolve((to, from) => {
+// router.beforeResolve((to, from) => {
 
-  if (to.meta.auth) {
-    return { name: 'login' }
-  }
-  // if (to.meta.guest) {
-  //   return { name: 'home' }
-  // }
+//   if (to.meta.auth) {
+//     return { name: 'login' }
+//   }
+//   // if (to.meta.guest) {
+//   //   return { name: 'home' }
+//   // }
 
-  if (to.name === 'posts-show') {
-    // try {
-    //   await axios.post('...')
-    // } catch (error) {
+//   if (to.name === 'posts-show') {
+//     // try {
+//     //   await axios.post('...')
+//     // } catch (error) {
       
-    // }
-    return false
-  }
-})
+//     // }
+//     return false
+//   }
+// })
 
 
 // router.afterEach((to, from, failure) => {
