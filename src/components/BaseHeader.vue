@@ -84,6 +84,20 @@ export default {
       this.isBasketDropDown = false;
       this.isAccountDropDown = !this.isAccountDropDown
     },
+    eventListener(event) {
+      if (! event.target.closest('.header__basket,.header__account')) {
+        this.isBasketDropDown = false;
+        this.isAccountDropDown = false;
+      }
+    }
+  },
+
+  mounted() {
+    document.addEventListener('click', this.eventListener);
+  },
+
+  destroyed() {
+    document.removeEventListener('click', this.eventListener);
   }
 }
 </script>
