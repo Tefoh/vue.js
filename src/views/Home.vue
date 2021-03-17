@@ -15,17 +15,8 @@
                 <a @click="move(1)" class="slideshow__next">&#10094;</a>
 
                 <div class="slideshow__items">
-                    <div class="slideshow__item">
-                        <div class="slideshow__item-inner"></div>
-                    </div>
-                    <div class="slideshow__item">
-                        <div class="slideshow__item-inner"></div>
-                    </div>
-                    <div class="slideshow__item">
-                        <div class="slideshow__item-inner"></div>
-                    </div>
-                    <div class="slideshow__item">
-                        <div class="slideshow__item-inner"></div>
+                    <div class="slideshow__item" v-for="(slide, index) in slides" :key="slide.img">
+                        <div class="slideshow__item-inner" :style="index === slideShowIndex ? `width: ${progressWidth}%` : ''"></div>
                     </div>
                 </div>
             </div>
@@ -45,7 +36,8 @@ export default {
       { img: require('../assets/img/slideshow/4.png') },
     ],
     slideShowIndex: 0,
-    sliderInterval: null
+    sliderInterval: null,
+    progressWidth: 0
   }),
 
   methods: {
@@ -62,9 +54,13 @@ export default {
 
   created() {
     this.sliderInterval = setInterval(() => {
-      console.log(1)
-      this.move(1);
-    }, 1500);
+      if (this.progressWidth >= 100) {
+        this.progressWidth = 0;
+        this.move(1);
+      } else {
+        this.progressWidth++;
+      }
+    }, 15);
   },
 
   destroyed() {
