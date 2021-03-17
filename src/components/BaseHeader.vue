@@ -29,7 +29,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="navbar__item"><a href="" class="navbar__link">درباره ما</a></li>
+                            <li class="navbar__item"><router-link :to="{ name: 'About' }" class="navbar__link">درباره ما</router-link></li>
                             <li class="navbar__item"><a href="" class="navbar__link">تماس باما</a></li>
                         </ul>
                     </div>
@@ -38,29 +38,47 @@
                             <span class="header__basket-icon" @click="showDropDownBasket"></span>
                             <span class="header__basket-count">0</span>
                             <div class="header__dropdown" :class="{ 'header__dropdown--is-active': isBasketDropDown }">
-                                <div class="header__dropdown-content header__dropdown-content--overflow">
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                    <p>1</p>
-                                </div>
-                            </div>
+                              <div class="header__dropdown-content header__dropdown-content--overflow">
+                                  <div class="header__basket-item" v-for="item in 3" :key="item">
+                                      <a href="" class="header__basket-link">
+                                          <img :src="require('../assets/img/big-pic.jpg')" class="header__basket-img">
+                                      </a>
+                                      <div class="header__basket-details">
+                                          <h5><a class="header__basket-title" href="">محصول شماره یک</a></h5>
+                                          <div class="header__basket-price">120000 تومان</div>
+                                          <a href="" class="header__basket-remove">حذف</a>
+                                      </div>
+                                  </div>
+                                  <div class="header__basket-btn">
+                                      <a href="cart.html" class="btn btn--boxshadow btn--brand w--100">ثبت و نهایی کردن
+                                          سفارش</a>
+                                  </div>
+                              </div>
+                          </div>
                         </div>
                         <div class="header__account">
                             <span class="header__account-icon" @click="showDropDownAccount"></span>
-                            <div class="header__dropdown header__dropdown--w200"  :class="{ 'header__dropdown--is-active': isAccountDropDown }">
-                                <div class="header__dropdown-content">account</div>
+                            <div class="header__dropdown header__dropdown--w200" :class="{ 'header__dropdown--is-active': isAccountDropDown }">
+                                <div class="header__dropdown-content">
+                                    <a href="sign-in.html" class="header__account-link">ورود</a>
+                                    <a href="sign-up.html" class="header__account-link">ثبت نام</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="header__top">
+                <div class="header__top-content">
+                    <h1 class="header__top-h1">وب آموز : پلی برای یادگیری</h1>
+                    <p class="header__top-p">با کمترین هزینه حرفه ای شو</p>
+                </div>
+                <form class="header__form">
+                    <div class="header__search">
+                        <input type="text" class="header__serach-input" placeholder="جستجو کنید...">
+                        <button class="header__search-btn btn btn--brand btn--boxshadow"></button>
+                    </div>
+                </form>
             </div>
         </div>
     </header>
