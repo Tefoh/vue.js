@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header header--bg">
         <div class="header__shape">
             <div class="header__shape-inner"></div>
         </div>
@@ -68,18 +68,6 @@
                         <div class="header__menu" :class="{ 'header__menu--is-active': showSideBar }" @click="toggleSidebar"></div>
                     </div>
                 </div>
-            </div>
-            <div class="header__top">
-                <div class="header__top-content">
-                    <h1 class="header__top-h1">وب آموز : پلی برای یادگیری</h1>
-                    <p class="header__top-p">با کمترین هزینه حرفه ای شو</p>
-                </div>
-                <form class="header__form">
-                    <div class="header__search">
-                        <input type="text" class="header__serach-input" placeholder="جستجو کنید...">
-                        <button class="header__search-btn btn btn--brand btn--boxshadow"></button>
-                    </div>
-                </form>
             </div>
         </div>
     </header>
