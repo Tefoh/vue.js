@@ -7,7 +7,7 @@
             <div class="navbar">
                 <div class="navbar__row">
                     <div class="header__logo"><router-link :to="{ to: 'Home' }" class="header__logo-img"></router-link></div>
-                    <div class="navbar__items">
+                    <div class="navbar__items" :class="{ 'navbar__items--is-active': showSideBar }">
                         <ul class="navbar__ul">
                             <li class="navbar__item"><router-link :to="{ to: 'Home' }" class="navbar__link navbar__link--is-active">صفحه اصلی</router-link></li>
                             <li class="navbar__item navbar__item--has-sub"><a href="" class="navbar__link">فروشگاه</a>
@@ -65,6 +65,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="header__menu" :class="{ 'header__menu--is-active': showSideBar }" @click="toggleSidebar"></div>
                     </div>
                 </div>
             </div>
@@ -91,6 +92,7 @@ export default {
   data: () => ({
     isBasketDropDown: false,
     isAccountDropDown: false,
+    showSideBar: false
   }),
 
   methods: {
@@ -107,6 +109,11 @@ export default {
         this.isBasketDropDown = false;
         this.isAccountDropDown = false;
       }
+    },
+    toggleSidebar() {
+        this.showSideBar = !this.showSideBar;
+
+        this.$emit('show-sidebar', this.showSideBar);
     }
   },
 
