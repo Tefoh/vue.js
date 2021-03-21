@@ -63,12 +63,23 @@ export default {
   },
   
   data: () => ({
-    showScrollTop: false
+    showScrollTop: false,
+    scrollTimeout: null
   }),
 
   methods: {
     handleScroll() {
-      this.showScrollTop = window.scrollY > 200;
+      if (this.scrollTimeout) return;
+
+      console.log('user scrolled')
+      
+
+      this.scrollTimeout = setTimeout(() => {
+        this.showScrollTop = window.scrollY > 200;
+
+        clearTimeout(this.scrollTimeout);
+        this.scrollTimeout = 0;
+      }, 150);
     },
     goTop() {
       window.scrollTo({
