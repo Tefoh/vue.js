@@ -3,16 +3,16 @@
       <div class="container">
           <div class="page">
               <div class="page__sidebar">
-                  <div class="box">
+                  <div class="box" v-show="selectedFilters.length > 0">
                       <div class="box-filters">
                           <div class="box-filters__header">
                               <span class="box-filters__title">فیلتر های اعمال شده</span>
-                              <a href="" class="box-filters__clear">حذف همه</a>
+                              <a class="box-filters__clear" @click.prevent="removeAll">حذف همه</a>
                           </div>
                           <ul class="box-filters__ul">
-                              <li class="box-filters__li">
-                                  <button class="box-filters__button"></button>
-                                  <span class="box-filters__name">سامسونگ</span>
+                              <li class="box-filters__li" v-for="filter in selectedFilters" :key="filter">
+                                  <button class="box-filters__button" @click="removeFilter(filter)"></button>
+                                  <span class="box-filters__name">{{ filter }}</span>
                               </li>
                           </ul>
                       </div>
@@ -29,21 +29,21 @@
                                       <ul class="box__ul">
                                           <li class="box__li">
                                               <label class="ui-checkbox" data-fa="سامسونگ" data-en="Sumsung" data-serach="Sumsung سامسونگ">
-                                                  <input type="checkbox" class="ui-checkbox__input">
+                                                  <input type="checkbox" class="ui-checkbox__input" value="سامسونگ" v-model="selectedFilters">
                                                   <span class="ui-checkbox__mark"></span>
                                                   سامسونگ
                                               </label>
                                           </li>
                                           <li class="box__li">
                                               <label class="ui-checkbox" data-fa="سونی" data-en="sony" data-serach="sony سونی">
-                                                  <input type="checkbox" class="ui-checkbox__input">
+                                                  <input type="checkbox" class="ui-checkbox__input" value="سونی" v-model="selectedFilters">
                                                   <span class="ui-checkbox__mark"></span>
                                                   سونی
                                               </label>
                                           </li>
                                           <li class="box__li">
                                               <label class="ui-checkbox" data-fa="اپل" data-en="apple" data-serach="apple اپل">
-                                                  <input type="checkbox" class="ui-checkbox__input">
+                                                  <input type="checkbox" class="ui-checkbox__input" value="اپل" v-model="selectedFilters">
                                                   <span class="ui-checkbox__mark"></span>
                                                   اپل
                                               </label>
@@ -66,7 +66,7 @@
                                       <ul class="box__ul">
                                           <li class="box__li">
                                               <label class="ui-checkbox" data-fa="مشکی" data-serach="balck مشکی">
-                                                  <input type="checkbox" class="ui-checkbox__input">
+                                                  <input type="checkbox" class="ui-checkbox__input" value="مشکی" v-model="selectedFilters">
                                                   <span class="ui-checkbox__mark"></span>
                                                   مشکی
                                                   <span class="filter__color" style="background: rgb(0,0,0)"></span>
@@ -74,7 +74,7 @@
                                           </li>
                                           <li class="box__li">
                                               <label class="ui-checkbox" data-fa="آبی" data-serach="blue آبی">
-                                                  <input type="checkbox" class="ui-checkbox__input">
+                                                  <input type="checkbox" class="ui-checkbox__input" value="آبی" v-model="selectedFilters">
                                                   <span class="ui-checkbox__mark"></span>
                                                   آبی
                                                   <span class="filter__color" style="background: rgb(0,0,255)"></span>
@@ -136,8 +136,18 @@ export default {
 
   data: () => ({
     isBrandOpen: true,
-    isColorOpen: true
-  })
+    isColorOpen: true,
+    selectedFilters: []
+  }),
+
+  methods: {
+    removeAll() {
+      this.selectedFilters = [];
+    },
+    removeFilter(filter) {
+      this.selectedFilters = this.selectedFilters.filter((item) => item !== filter);
+    }
+  }
 }
 </script>
 
