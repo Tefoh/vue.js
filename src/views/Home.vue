@@ -78,6 +78,10 @@ import SwiperSlider from '../components/SwiperSlider'
 export default {
   name: "Home",
 
+  metaInfo: {
+    titleTemplate: null
+  },
+
   components: {
     SwiperSlider
   },

@@ -121,8 +121,19 @@
 </template>
 
 <script>
+
+/*
+- SPA (single page application)
+- SSR (server side render)
+- SSG (static site generator)
+*/
+
 export default {
-  name: "Category"
+  name: "Category",
+
+  metaInfo: {
+    title: "صفحه دسته بندی محصولات"
+  }
 }
 </script>
 
