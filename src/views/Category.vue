@@ -106,7 +106,7 @@
                       </li>
                   </ul>
                   <div class="products">
-                      <a href="product.html" v-for="item in 6" :key="item" class="products__item">
+                      <router-link :to="{ name: 'Product', params: { id: index } }" v-for="(item, index) in 6" :key="item" class="products__item">
                           <div class="card">
                               <div class="card__image"><img :src="require(`../assets/img/slider/${item}.jpg`)" alt="" class="card__img"></div>
                               <div class="card__title">
@@ -118,7 +118,7 @@
                               </div>
                               <span class="card__discount">%6</span>
                           </div>
-                      </a>
+                      </router-link>
                   </div>
               </div>
           </div>

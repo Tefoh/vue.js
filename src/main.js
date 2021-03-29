@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import './assets/css/font.css'
 import './assets/css/style.css'
+import './assets/css/responsives.css'
 
 Vue.use(VueMeta)
 
