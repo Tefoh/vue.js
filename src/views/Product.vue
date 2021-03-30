@@ -16,6 +16,40 @@
                         {{ diff }}
                       </div>
                   </div>
+                  <div class="prodcut__gallery">
+                    <div class="gallery">
+                        <span class="gallery__count">
+                            <span class="gallery__number1">{{ slideIndex + 1 }}</span>
+                            <span class="gallery__number2">{{ gallerySlides.length }}</span>
+                        </span>
+                        <div class="gallery__slides">
+                            <div class="gallery__slide">
+                              <img
+                                class="gallery__img"
+                                :src="slide.img"
+                                alt=""
+                                v-for="(slide, index) in gallerySlides"
+                                :key="index"
+                                :style="slideIndex === index ? 'display:block;' : 'display:none;'"
+                              />
+                            </div>
+                        </div>
+                        <a @click.prevent="move(-1)" class="gallery__prev">&#10094;</a>
+                        <a @click.prevent="move(1)" class="gallery__next">&#10095;</a>
+                      <div class="gallery__content">
+                          <div class="gallery__items">
+                            <div
+                              class="gallery__item"
+                              :class="{ 'gallery__item--is-acitve': slideIndex === index }"
+                              v-for="(slide, index) in gallerySlides"
+                              :key="`item-${index}`"
+                            >
+                              <img :src="slide.img" @click="currentSlide(index)" class="gallery__item-img">
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
               </div>
           </div>
       </div>
@@ -23,7 +57,7 @@
 </template>
 
 <script>
-import moment, { duration } from 'moment'
+import moment from 'moment'
 
 export default {
   name: "Product",
@@ -36,7 +70,33 @@ export default {
     return {
       dateCountDown: moment('2021-08-07 00:00:00'),
       diff: null,
-      countDownInterval: null
+      countDownInterval: null,
+      gallerySlides: [
+        { img: require('../assets/img/slider/1.jpg') },
+        { img: require('../assets/img/slider/2.jpg') },
+        { img: require('../assets/img/slider/3.jpg') },
+        { img: require('../assets/img/slider/4.jpg') },
+        { img: require('../assets/img/slider/4.jpg') },
+        { img: require('../assets/img/slider/3.jpg') },
+        { img: require('../assets/img/slider/3.jpg') },
+        { img: require('../assets/img/slider/3.jpg') },
+      ],
+      slideIndex: 0
+    }
+  },
+
+  methods: {
+    move(n) {
+      if (this.gallerySlides.length <= this.slideIndex + n) {
+        this.slideIndex = 0;
+      } else if (this.slideIndex + n < 0) {
+        this.slideIndex = (this.gallerySlides.length - 1);
+      } else {
+        this.slideIndex += n
+      }
+    },
+    currentSlide(index) {
+      this.slideIndex = index
     }
   },
 
