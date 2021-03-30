@@ -12,7 +12,9 @@
           <div class="product">
               <div class="product__header">
                   <div class="product__expiration">
-                      <div class="count-down__timer" data-countdown="2021-08-07 00:00:00" id="count-dowm__timer">dsf</div>
+                      <div class="count-down__timer" id="count-dowm__timer">
+                        {{ diff }}
+                      </div>
                   </div>
               </div>
           </div>
@@ -21,11 +23,33 @@
 </template>
 
 <script>
+import moment, { duration } from 'moment'
+
 export default {
   name: "Product",
 
   metaInfo: {
     title: 'نمایش محصول'
+  },
+
+  data() {
+    return {
+      dateCountDown: moment('2021-08-07 00:00:00'),
+      diff: null,
+      countDownInterval: null
+    }
+  },
+
+  created() {
+    this.countDownInterval = setInterval(() => {
+      let diffTime = this.dateCountDown.diff(moment())
+      let durationTime = moment.duration(diffTime)
+      this.diff = `${Math.floor(durationTime.asDays())}:${durationTime.hours()}:${durationTime.minutes()}:${durationTime.seconds()}`
+    }, 1000)
+  },
+
+  destroyed() {
+    clearInterval(this.countDownInterval)
   }
   
 }
