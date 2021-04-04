@@ -25,6 +25,8 @@
                           {{ diff }}
                         </div>
                     </div>
+                    <div class="product__row">
+
                     <div class="prodcut__gallery">
                       <div class="gallery">
                           <span class="gallery__count">
@@ -59,7 +61,38 @@
                             </div>
                         </div>
                       </div>
-                  </div>
+                    </div>
+                    <div class="product__left">
+                      <div class="product__category">دسته وب</div>
+                        <div class="product__info">
+                            <h1 class="product__title">محصول شماره یک یک شماره </h1>
+
+                            <div class="rating">
+                                <div class="rating__star">
+                                    <span
+                                      class="rating__rate"
+                                      :data-title="rate.title"
+                                      v-for="rate in ratings"
+                                      :key="rate.title"
+                                      @click="rateWidth = rate.width"
+                                      @mouseover="handleMouseover"
+                                      @mouseleave="handleMouseleave"
+                                    ></span>
+                                </div>
+                                <div class="rating__fstar" :style="showRate ? `width: ${rateWidth}%` : ''">
+                                    <span class="rating__frate"></span>
+                                    <span class="rating__frate"></span>
+                                    <span class="rating__frate"></span>
+                                    <span class="rating__frate"></span>
+                                    <span class="rating__frate"></span>
+                                </div>
+                            </div>
+                            <div class="rating-star">4.5
+                                <span class="rating__num">(65)</span>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,9 +126,18 @@ export default {
         { img: require('../assets/img/slider/3.jpg') },
         { img: require('../assets/img/slider/3.jpg') },
       ],
+      ratings: [
+        { width: 100, title: 'عالی' },
+        { width: 80, title: 'خوب' },
+        { width: 60, title: 'معمولی' },
+        { width: 40, title: 'ضعیف' },
+        { width: 20, title: 'بد' },
+      ],
       slideIndex: 0,
       isShowingModal: false,
-      modalImage: null
+      modalImage: null,
+      rateWidth: 0,
+      showRate: true
     }
   },
 
@@ -120,6 +162,12 @@ export default {
     closeModal() {
       this.isShowingModal = false
       document.body.style.overflow = 'unset'
+    },
+    handleMouseover() {
+      this.showRate = false
+    },
+    handleMouseleave() {
+      this.showRate = true
     }
   },
 
