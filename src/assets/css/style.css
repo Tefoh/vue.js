@@ -1220,5 +1220,8 @@ ul li {
 }
 .gallery__item--is-acitve,.gallery__item:hover{
     opacity: 1;
+}
 
+.show__gallery{
+    width: 60%;
 }

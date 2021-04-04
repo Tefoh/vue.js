@@ -1,63 +1,75 @@
 <template>
-  <main class="main">
-      <div class="container">
-          <ul class="breadcrumb">
-              <li class="breadcrumb__item breadcrumb__item--hide"><a href="" class="breadcrumb__link"><span
-                      class="breadcrumb__span">صفحه اصلی</span></a></li>
-              <li class="breadcrumb__item"><a href="" class="breadcrumb__link"><span class="breadcrumb__span">فهرست محصولات</span></a>
-              </li>
-              <li class="breadcrumb__item"><a href="" class="breadcrumb__link"><span class="breadcrumb__span">محصول شماره یک</span></a>
-              </li>
-          </ul>
-          <div class="product">
-              <div class="product__header">
-                  <div class="product__expiration">
-                      <div class="count-down__timer" id="count-dowm__timer">
-                        {{ diff }}
-                      </div>
-                  </div>
-                  <div class="prodcut__gallery">
-                    <div class="gallery">
-                        <span class="gallery__count">
-                            <span class="gallery__number1">{{ slideIndex + 1 }}</span>
-                            <span class="gallery__number2">{{ gallerySlides.length }}</span>
-                        </span>
-                        <div class="gallery__slides">
-                            <div class="gallery__slide">
-                              <img
-                                class="gallery__img"
-                                :src="slide.img"
-                                alt=""
+  <div>
+    <div id="modal__gallery" class="modal" v-show="isShowingModal">
+        <div class="modal__content">
+            <span class="modal__close" @click="closeModal">&times;</span>
+            <div class="modal__body" tabindex="0" @focusout="closeModal">
+                <img :src="modalImage" class="show__gallery">
+            </div>
+        </div>
+    </div>
+    <main class="main">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item breadcrumb__item--hide"><a href="" class="breadcrumb__link"><span
+                        class="breadcrumb__span">صفحه اصلی</span></a></li>
+                <li class="breadcrumb__item"><a href="" class="breadcrumb__link"><span class="breadcrumb__span">فهرست محصولات</span></a>
+                </li>
+                <li class="breadcrumb__item"><a href="" class="breadcrumb__link"><span class="breadcrumb__span">محصول شماره یک</span></a>
+                </li>
+            </ul>
+            <div class="product">
+                <div class="product__header">
+                    <div class="product__expiration">
+                        <div class="count-down__timer" id="count-dowm__timer">
+                          {{ diff }}
+                        </div>
+                    </div>
+                    <div class="prodcut__gallery">
+                      <div class="gallery">
+                          <span class="gallery__count">
+                              <span class="gallery__number1">{{ slideIndex + 1 }}</span>
+                              <span class="gallery__number2">{{ gallerySlides.length }}</span>
+                          </span>
+                          <div class="gallery__slides">
+                              <div class="gallery__slide">
+                                <img
+                                  class="gallery__img"
+                                  :src="slide.img"
+                                  alt=""
+                                  v-for="(slide, index) in gallerySlides"
+                                  :key="index"
+                                  :style="slideIndex === index ? 'display:block;' : 'display:none;'"
+                                  @click="showModal(slide.img)"
+                                />
+                              </div>
+                          </div>
+                          <a @click.prevent="move(-1)" class="gallery__prev">&#10094;</a>
+                          <a @click.prevent="move(1)" class="gallery__next">&#10095;</a>
+                        <div class="gallery__content">
+                            <div class="gallery__items">
+                              <div
+                                class="gallery__item"
+                                :class="{ 'gallery__item--is-acitve': slideIndex === index }"
                                 v-for="(slide, index) in gallerySlides"
-                                :key="index"
-                                :style="slideIndex === index ? 'display:block;' : 'display:none;'"
-                              />
+                                :key="`item-${index}`"
+                              >
+                                <img :src="slide.img" @click="currentSlide(index)" class="gallery__item-img">
+                              </div>
                             </div>
                         </div>
-                        <a @click.prevent="move(-1)" class="gallery__prev">&#10094;</a>
-                        <a @click.prevent="move(1)" class="gallery__next">&#10095;</a>
-                      <div class="gallery__content">
-                          <div class="gallery__items">
-                            <div
-                              class="gallery__item"
-                              :class="{ 'gallery__item--is-acitve': slideIndex === index }"
-                              v-for="(slide, index) in gallerySlides"
-                              :key="`item-${index}`"
-                            >
-                              <img :src="slide.img" @click="currentSlide(index)" class="gallery__item-img">
-                            </div>
-                          </div>
                       </div>
-                    </div>
+                  </div>
                 </div>
-              </div>
-          </div>
-      </div>
-  </main>
+            </div>
+        </div>
+    </main>
+  </div>
 </template>
 
 <script>
 import moment from 'moment'
+import '../assets/css/modal.css'
 
 export default {
   name: "Product",
@@ -81,7 +93,9 @@ export default {
         { img: require('../assets/img/slider/3.jpg') },
         { img: require('../assets/img/slider/3.jpg') },
       ],
-      slideIndex: 0
+      slideIndex: 0,
+      isShowingModal: false,
+      modalImage: null
     }
   },
 
@@ -97,6 +111,15 @@ export default {
     },
     currentSlide(index) {
       this.slideIndex = index
+    },
+    showModal(image) {
+      this.isShowingModal = true
+      this.modalImage = image
+      document.body.style.overflow = 'hidden'
+    },
+    closeModal() {
+      this.isShowingModal = false
+      document.body.style.overflow = 'unset'
     }
   },
 
