@@ -746,6 +746,9 @@ ul li {
 .margin--right-10 {
     margin-right: 10px;
 }
+.margin--bottom-10 {
+    margin-bottom: 10px;
+}
 
 .footer__main {
     background: #fff
@@ -890,7 +893,8 @@ ul li {
 }
 
 .ui-checkbox {
-    display: block;
+    display: inline-block;
+    width: 100%;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 14px;
@@ -925,6 +929,7 @@ ul li {
     margin-left: 5px;
     vertical-align: middle;
     pointer-events: none;
+    position: relative;
 }
 
 .ui-checkbox__input:checked ~ .ui-checkbox__mark {
@@ -1541,7 +1546,7 @@ select {
 
 .alert {
     padding: 14px 20px;
-    maring: 5px 0;
+    margin: 5px 0;
     font-size: 15px;
 }
 
@@ -1943,9 +1948,69 @@ table th, table td {
 table tbody tr:nth-child(2n+1) {
     background: #f9f9f9;
 }
-.text-red{
+
+.text-red {
     color: #ff6e6e;
 }
-.text-blue{
+
+.text-blue {
+    color: #36b3fb;
+}
+
+.account {
+    background: #fff;
+    padding: 30px 0;
+}
+
+.account__title {
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e2e2e2;
+    color: #6c757d;
+}
+
+.account__form {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.txt::placeholder {
+    text-align: right;
+    padding: 0 12px;
+}
+
+.txt--left {
+    text-align: left
+}
+
+.txt--right {
+    text-align: right
+}
+
+.txt--left::placeholder {
+    text-align: right !important;
+}
+
+.account__recoverpass {
+    color: #36b3fb;
+    padding: 10px 0;
+    font-size: 13px;
+}
+
+.account__footer {
+    padding: 12px 40px 12px;
+    background: rgba(0, 190, 214, .04);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.467;
+    color: #6c757d;
+    margin-top: 15px;
+}
+.account__router{
     color: #36b3fb;
 }

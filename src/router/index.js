@@ -29,6 +29,21 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: () => import(/* webpackChunkName: "cart" */ '../views/Cart.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
+  },
+  {
+    path: '/reset-pass',
+    name: 'ResetPass',
+    component: () => import(/* webpackChunkName: "reset-pass" */ '../views/ResetPass.vue')
   }
 ]
 

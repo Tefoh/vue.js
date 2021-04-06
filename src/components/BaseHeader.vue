@@ -6,23 +6,23 @@
         <div class="container">
             <div class="navbar">
                 <div class="navbar__row">
-                    <div class="header__logo"><router-link :to="{ to: 'Home' }" class="header__logo-img"></router-link></div>
+                    <div class="header__logo"><router-link :to="{ name: 'Home' }" class="header__logo-img"></router-link></div>
                     <div class="navbar__items" :class="{ 'navbar__items--is-active': showSideBar }">
                         <ul class="navbar__ul">
-                            <li class="navbar__item"><router-link :to="{ to: 'Home' }" class="navbar__link navbar__link--is-active">صفحه اصلی</router-link></li>
+                            <li class="navbar__item"><router-link :to="{ name: 'Home' }" class="navbar__link navbar__link--is-active">صفحه اصلی</router-link></li>
                             <li class="navbar__item navbar__item--has-sub"><a href="" class="navbar__link">فروشگاه</a>
                                 <ul class="navbar__subset">
-                                    <li class="navbar__item"><a href="" class="navbar__link">زیر منو 1</a></li>
-                                    <li class="navbar__item"><a href="" class="navbar__link">زیر منو 2</a></li>
-                                    <li class="navbar__item navbar__item--has-sub"><a href="" class="navbar__link">زیر منو 3</a>
+                                    <li class="navbar__item"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 1</router-link></li>
+                                    <li class="navbar__item"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 2</router-link></li>
+                                    <li class="navbar__item navbar__item--has-sub"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 3</router-link>
                                         <ul class="navbar__subset">
-                                            <li class="navbar__item"><a href="" class="navbar__link">زیر منو 1</a></li>
-                                            <li class="navbar__item"><a href="" class="navbar__link">زیر منو 2</a></li>
+                                            <li class="navbar__item"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 1</router-link></li>
+                                            <li class="navbar__item"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 2</router-link></li>
                                             <li class="navbar__item navbar__item--has-sub"><a href="" class="navbar__link">زیر منو 3</a>
                                                 <ul class="navbar__subset">
-                                                    <li class="navbar__item"><a href="" class="navbar__link">زیر منو 1</a></li>
-                                                    <li class="navbar__item"><a href="" class="navbar__link">زیر منو 2</a></li>
-                                                    <li class="navbar__item"><a href="" class="navbar__link">زیر منو 3</a></li>
+                                                    <li class="navbar__item"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 1</router-link></li>
+                                                    <li class="navbar__item"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 2</router-link></li>
+                                                    <li class="navbar__item"><router-link :to="{ name: 'Category' }" class="navbar__link">زیر منو 3</router-link></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -50,8 +50,8 @@
                                       </div>
                                   </div>
                                   <div class="header__basket-btn">
-                                      <a href="cart.html" class="btn btn--boxshadow btn--brand w--100">ثبت و نهایی کردن
-                                          سفارش</a>
+                                      <router-link :to="{ name: 'Cart' }" class="btn btn--boxshadow btn--brand w--100">ثبت و نهایی کردن
+                                          سفارش</router-link>
                                   </div>
                               </div>
                           </div>
@@ -60,8 +60,8 @@
                             <span class="header__account-icon" @click="showDropDownAccount"></span>
                             <div class="header__dropdown header__dropdown--w200" :class="{ 'header__dropdown--is-active': isAccountDropDown }">
                                 <div class="header__dropdown-content">
-                                    <a href="sign-in.html" class="header__account-link">ورود</a>
-                                    <a href="sign-up.html" class="header__account-link">ثبت نام</a>
+                                    <router-link :to="{ name: 'Login' }" class="header__account-link">ورود</router-link>
+                                    <router-link :to="{ name: 'Register' }" class="header__account-link">ثبت نام</router-link>
                                 </div>
                             </div>
                         </div>
