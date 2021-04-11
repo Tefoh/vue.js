@@ -11,11 +11,6 @@ import BaseHeader from './components/BaseHeader'
 import BaseFooter from './components/BaseFooter'
 export default {
 
-  metaInfo: {
-    title: 'فروشگاه وب آموز',
-    titleTemplate: '%s - فروشگاه وب آموز'
-  },
-
   data: () => ({
     isShowSideBar: false
   }),
@@ -29,6 +24,12 @@ export default {
     handleSidebar(showSideBar) {
       this.isShowSideBar = showSideBar;
     }
+  },
+
+  created() {
+    console.log(
+      this.$store.state.products
+    )
   }
 }
 </script>
