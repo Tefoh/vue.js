@@ -114,7 +114,7 @@ export default {
     document.addEventListener('click', this.eventListener);
   },
 
-  destroyed() {
+  unmounted() {
     document.removeEventListener('click', this.eventListener);
   }
 }

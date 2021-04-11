@@ -121,7 +121,7 @@ export default {
     }, 15);
   },
 
-  destroyed() {
+  unmounted() {
     clearInterval(this.sliderInterval)
   }
 }

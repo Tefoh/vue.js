@@ -93,7 +93,7 @@ export default {
     document.addEventListener('scroll', this.handleScroll);
   },
 
-  destroyed() {
+  unmounted() {
     document.removeEventListener('scroll', this.handleScroll);
   }
 }

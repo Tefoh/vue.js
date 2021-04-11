@@ -95,18 +95,6 @@
                             </div>
                         </div>
                         <div class="controls">
-                          <Multiselect
-                            :options="colorsOptions"
-                            v-model="selectedColor"
-                            placeholder="گزینه خود را انتخاب کنید"
-                          />
-                          <Multiselect
-                            :options="langOptions"
-                            v-model="selectedLang"
-                            :multiple="true"
-                            label="name"
-                            placeholder="گزینه خود را انتخاب کنید"
-                          />
 
                         </div>
                       </div>
@@ -165,24 +153,16 @@ import CompareTab from '../components/Tabs/CompareTab'
 import CommentsTab from '../components/Tabs/CommentsTab'
 import FeaturesTab from '../components/Tabs/FeaturesTab'
 import moment from 'moment'
-import 'vue-multiselect/dist/vue-multiselect.min.css'
 import '../assets/css/modal.css'
-
-import Multiselect from 'vue-multiselect'
 
 export default {
   name: "Product",
 
   components: {
-    Multiselect,
     SwiperSlider,
     CompareTab,
     CommentsTab,
     FeaturesTab
-  },
-
-  metaInfo: {
-    title: 'نمایش محصول'
   },
 
   data() {
@@ -271,7 +251,7 @@ export default {
     }, 1000)
   },
 
-  destroyed() {
+  unmounted() {
     clearInterval(this.countDownInterval)
   }
   
