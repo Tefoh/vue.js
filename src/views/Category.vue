@@ -106,15 +106,14 @@
                       </li>
                   </ul>
                   <div class="products">
-                      <router-link :to="{ name: 'Product', params: { id: index } }" v-for="(item, index) in 6" :key="item" class="products__item">
+                      <router-link :to="{ name: 'Product', params: { id: index } }" v-for="(item, index) in products" :key="item.id" class="products__item">
                           <div class="card">
-                              <div class="card__image"><img :src="require(`../assets/img/slider/${item}.jpg`)" alt="" class="card__img"></div>
+                              <div class="card__image"><img :src="require(`../assets/img/slider/${item.id}.jpg`)" alt="" class="card__img"></div>
                               <div class="card__title">
-                                  گوشی موبایل سامسونگ مدل نوت 20
+                                  {{ item.name }}
                               </div>
                               <div class="card__price">
-                                  <span class="card__compare-price">12,200,000</span>
-                                  <span class="card__total-price">12,400,000 تومان</span>
+                                  <span class="card__total-price">{{ item.price }} تومان</span>
                               </div>
                               <span class="card__discount">%6</span>
                           </div>
@@ -130,15 +129,17 @@
 export default {
   name: "Category",
 
-  metaInfo: {
-    title: "صفحه دسته بندی محصولات"
-  },
-
   data: () => ({
     isBrandOpen: true,
     isColorOpen: true,
-    selectedFilters: []
+    selectedFilters: [],
   }),
+
+  computed: {
+    products() {
+      return this.$store.state.products
+    }
+  },
 
   methods: {
     removeAll() {
@@ -147,6 +148,10 @@ export default {
     removeFilter(filter) {
       this.selectedFilters = this.selectedFilters.filter((item) => item !== filter);
     }
+  },
+
+  created() {
+    this.$store.dispatch('getProducts')
   }
 }
 </script>
