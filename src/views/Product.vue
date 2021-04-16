@@ -157,7 +157,7 @@ import '../assets/css/modal.css'
 
 import axios from 'axios'
 
-import { SET_PRODUCTS_MUTATIONS } from '@/store/types'
+import { SET_PRODUCTS_MUTATIONS } from '@/store/modules/products/types'
 
 import { mapMutations } from 'vuex'
 

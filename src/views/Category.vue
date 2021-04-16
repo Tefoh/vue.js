@@ -142,10 +142,8 @@ export default {
       numberOne() {
         return 1;
       },
-      ...mapGetters({
-        products: "products",
-        userName: 'name'
-      })
+      ...mapGetters('products', ['products']),
+      ...mapGetters('userName', { userName: 'name' }),
   },
 
   methods: {
@@ -155,12 +153,14 @@ export default {
     removeFilter(filter) {
       this.selectedFilters = this.selectedFilters.filter((item) => item !== filter);
     },
-    ...mapActions(['getProducts'])
+    ...mapActions('products', ['getProducts'])
   },
 
   created() {
-    this.getProducts({ text: 'dfjghkdfhgdrigh' })
-    // this.$store.dispatch('getProducts', { text: 'dfjghkdfhgdrigh' })
+    // this.getProducts({ text: 'dfjghkdfhgdrigh' })
+    this.$store.dispatch('products/getProducts', { text: 'dfjghkdfhgdrigh' })
+
+    // console.log(this.$store.getters['userName/name'])
   }
 }
 </script>

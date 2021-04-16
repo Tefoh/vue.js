@@ -1,15 +1,13 @@
 import { createStore } from 'vuex'
 
-import state from './state'
-import getters from './getters'
-import mutations from './mutations'
-import actions from './actions'
+import user from './modules/user'
+import products from './modules/products'
 
 const store = createStore({
-  state,
-  getters,
-  mutations,
-  actions
+  modules: {
+    userName: user,
+    products
+  }
 })
 
 export default store
