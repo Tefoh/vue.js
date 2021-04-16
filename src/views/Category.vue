@@ -107,7 +107,7 @@
                       </li>
                   </ul>
                   <div class="products">
-                      <router-link :to="{ name: 'Product', params: { id: index } }" v-for="(item, index) in products" :key="item.id" class="products__item">
+                      <router-link :to="{ name: 'Product', params: { id: item.id } }" v-for="(item, index) in products" :key="item.id" class="products__item">
                           <div class="card">
                               <div class="card__image"><img :src="require(`../assets/img/slider/${item.id}.jpg`)" alt="" class="card__img"></div>
                               <div class="card__title">
@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "Category",
@@ -142,9 +142,9 @@ export default {
       numberOne() {
         return 1;
       },
-      ...mapState({
-        products: 'products',
-        userName: state => state.user.name
+      ...mapGetters({
+        products: "products",
+        userName: 'name'
       })
   },
 

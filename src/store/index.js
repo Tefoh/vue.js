@@ -8,7 +8,22 @@ const store = createStore({
     user: { name: "tofiq", id: 1 }
   }),
 
-  getters: {},
+  getters: {
+    // products (state) {
+    //   return state.products
+    // },
+    // getProductById: function(state) {
+    //   return function (id) {
+    //     return state.products.find(product => product.id === id)
+    //   }
+    // },
+    // name (state) {
+    //   return state.user.name
+    // }
+    products: state => state.products,
+    getProductById: state => id => state.products.find(product => product.id === id),
+    name: state => state.user.name
+  },
 
   mutations: {
     SET_PRODUCTS (state, data) {
