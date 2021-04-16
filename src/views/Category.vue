@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: "Category",
@@ -154,11 +154,13 @@ export default {
     },
     removeFilter(filter) {
       this.selectedFilters = this.selectedFilters.filter((item) => item !== filter);
-    }
+    },
+    ...mapActions(['getProducts'])
   },
 
   created() {
-    this.$store.dispatch('getProducts')
+    this.getProducts({ text: 'dfjghkdfhgdrigh' })
+    // this.$store.dispatch('getProducts', { text: 'dfjghkdfhgdrigh' })
   }
 }
 </script>
