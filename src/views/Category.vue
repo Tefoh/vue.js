@@ -97,6 +97,7 @@
                   </div>
               </div>
               <div class="page__content">
+                  <h1>اسم کاربر {{ userName }}</h1>
                   <ul class="breadcrumb">
                       <li class="breadcrumb__item breadcrumb__item--hide"><a href="" class="breadcrumb__link"><span
                               class="breadcrumb__span">صفحه اصلی</span></a></li>
@@ -126,6 +127,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: "Category",
 
@@ -136,9 +139,13 @@ export default {
   }),
 
   computed: {
-    products() {
-      return this.$store.state.products
-    }
+      numberOne() {
+        return 1;
+      },
+      ...mapState({
+        products: 'products',
+        userName: state => state.user.name
+      })
   },
 
   methods: {
