@@ -155,6 +155,12 @@ import FeaturesTab from '../components/Tabs/FeaturesTab'
 import moment from 'moment'
 import '../assets/css/modal.css'
 
+import axios from 'axios'
+
+import { SET_PRODUCTS_MUTATIONS } from '@/store/types'
+
+import { mapMutations } from 'vuex'
+
 export default {
   name: "Product",
 
@@ -241,10 +247,11 @@ export default {
     },
     handleMouseleave() {
       this.showRate = true
-    }
+    },
+    ...mapMutations([SET_PRODUCTS_MUTATIONS])
   },
 
-  created() {
+  async created() {
     this.countDownInterval = setInterval(() => {
       let diffTime = this.dateCountDown.diff(moment())
       let durationTime = moment.duration(diffTime)
@@ -254,11 +261,13 @@ export default {
     this.product = this.$store.getters.getProductById(parseInt(this.$route.params.id))
 
     if (! this.product) {
+      const { data } = await axios.get('https://gist.githubusercontent.com/Tefoh/57a0ef76ab63a974105b9f0fbcb8475b/raw/d49e3d8104992ff6cc6742fbe91b0c642287837a/products.json')
 
-      this.$store.dispatch('getProducts')
-        .then(() => {
-          this.product = this.$store.getters.getProductById(parseInt(this.$route.params.id))
-        })
+      this.SET_PRODUCTS(data)
+      // this.$store.commit(SET_PRODUCTS_MUTATIONS, data) // with types
+      // this.$store.commit('SET_PRODUCTS', data) // with mutation name
+
+      this.product = this.$store.getters.getProductById(parseInt(this.$route.params.id))
     }
   },
 
