@@ -4,33 +4,8 @@
           <div class="cart">
               <h1 class="cart__title">سبد خرید</h1>
               <form action="">
-                  <div class="cart__item" v-for="item in 6" :key="item">
-                      <div class="cart__row">
-                          <div class="cart__image">
-                              <a href="" class="cart__image-link"><img :src="require(`../assets/img/slider/${item}.jpg`)" alt=""
-                                                                      class="cart__image-img"></a>
-                          </div>
-                          <div class="cart__details">
-                              <h5 class="cart__details-h5"><a href="" target="_blank" class="cart__details-link">نمونه
-                                  محصول</a></h5>
-                              <div class="cart__deatils-features">رنگ :‌سفید : اندازه : کوچیک :‌حجم : ۳۲ گیگ</div>
-                              <div class="cart__deatils-code"> کد :111111111111</div>
-                          </div>
-                          <div class="cart__amounts">
-                              <div class="cart__amounts-div">
-                                  <input type="number" class="txt" placeholder="تعداد" max="1000" min="1">
-                                  <div class="cart__amounts-price"><span>۱۴۰۰۰ تومان</span></div>
-                                  <a href="#" onclick="removeCartItem(this)" class="cart__amounts-remove">حذف</a>
-                              </div>
-                          </div>
-                          <div class="cart__total">
-                              <div class="cart__total-div">
-                                  <h6 class="cart__total-title">جمع</h6>
-                                  ۲,۳۰۰,۰۰۰ تومان
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                  <p v-if="items.length < 1">سبد شما خالیست</p>
+                  <CartItem v-for="item in items" :key="item.id" :item="item" />
               </form>
               <div class="cart__info">
                   <div class="cart__coupon">
@@ -46,15 +21,11 @@
                           <tbody>
                           <tr>
                               <th>جمع کل</th>
-                              <td>500000 تومان</td>
-                          </tr>
-                          <tr>
-                              <th>وزن</th>
-                              <td>700 گرم</td>
+                              <td>{{ formattedPrice(subtotal) }} تومان</td>
                           </tr>
                           <tr>
                               <th>مالیات</th>
-                              <td>0 تومان</td>
+                              <td>{{ formattedPrice(tax) }} تومان</td>
                           </tr>
                           <tr>
                               <th>تخفیف</th>
@@ -62,7 +33,7 @@
                           </tr>
                           <tr>
                               <th>قابل پرداخت</th>
-                              <td class="text-blue">6000000 تومان</td>
+                              <td class="text-blue">{{ formattedPrice(total) }} تومان</td>
                           </tr>
                           </tbody>
                       </table>
@@ -75,8 +46,24 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
+import CartItem from '@/components/CartItem'
 export default {
+  name: "Cart",
 
+  components: {
+    CartItem
+  },
+
+  computed: {
+    ...mapState('cart', ['items']),
+    ...mapGetters('cart', ['subtotal', 'tax', 'total'])
+  },
+  methods: {
+    formattedPrice(price) {
+      return new Intl.NumberFormat('ar-EG').format(price)
+    },
+  }
 }
 </script>
 

@@ -69,7 +69,6 @@
                       <div class="product__category">دسته وب</div>
                         <div class="product__info">
                             <h1 class="product__title">{{ product?.name }} </h1>
-
                             <div class="rating">
                                 <div class="rating__star">
                                     <span
@@ -93,6 +92,14 @@
                             <div class="rating-star">4.5
                                 <span class="rating__num">(65)</span>
                             </div>
+                        </div>
+                        <div>
+                          <button
+                            class="btn btn--boxshadow btn--brand"
+                            @click="addItem(product)"
+                          >
+                            اضافه به سبد خرید
+                          </button>
                         </div>
                         <div class="controls">
 
@@ -158,8 +165,7 @@ import '../assets/css/modal.css'
 import axios from 'axios'
 
 import { SET_PRODUCTS_MUTATIONS } from '@/store/modules/products/types'
-import products from '@/store/modules/products'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState, mapActions } from 'vuex'
 
 export default {
   name: "Product",
@@ -220,6 +226,10 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('cart', ['items'])
+  },
+
   methods: {
     move(n) {
       if (this.gallerySlides.length <= this.slideIndex + n) {
@@ -248,7 +258,8 @@ export default {
     handleMouseleave() {
       this.showRate = true
     },
-    ...mapMutations('products', [SET_PRODUCTS_MUTATIONS])
+    ...mapMutations('products', [SET_PRODUCTS_MUTATIONS]),
+    ...mapActions('cart', ['addItem'])
   },
 
   async created() {

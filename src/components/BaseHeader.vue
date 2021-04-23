@@ -36,17 +36,21 @@
                     <div class="navbar__action">
                         <div class="header__basket">
                             <span class="header__basket-icon" @click="showDropDownBasket"></span>
-                            <span class="header__basket-count">0</span>
+                            <span class="header__basket-count">{{ count }}</span>
                             <div class="header__dropdown" :class="{ 'header__dropdown--is-active': isBasketDropDown }">
                               <div class="header__dropdown-content header__dropdown-content--overflow">
-                                  <div class="header__basket-item" v-for="item in 3" :key="item">
+                                  <div class="header__basket-item" v-for="item in items" :key="item.id">
                                       <a href="" class="header__basket-link">
-                                          <img :src="require('../assets/img/big-pic.jpg')" class="header__basket-img">
+                                          <img :src="require(`../assets/img/slider/${item.id}.jpg`)" class="header__basket-img">
                                       </a>
                                       <div class="header__basket-details">
-                                          <h5><a class="header__basket-title" href="">محصول شماره یک</a></h5>
-                                          <div class="header__basket-price">120000 تومان</div>
-                                          <a href="" class="header__basket-remove">حذف</a>
+                                          <h5><a class="header__basket-title" href="">{{ item.name }} ({{ item.quantity }})</a></h5>
+                                          <div class="header__basket-price">{{ item.price }} تومان</div>
+                                          <button
+                                            @click="removeItem(item)"
+                                            type="button"
+                                            class="header__basket-remove"
+                                            >حذف</button>
                                       </div>
                                   </div>
                                   <div class="header__basket-btn">
@@ -74,6 +78,8 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
+
 export default {
   name: "BaseHeader",
 
@@ -82,6 +88,11 @@ export default {
     isAccountDropDown: false,
     showSideBar: false
   }),
+
+  computed: {
+    ...mapState('cart', ['items']),
+    ...mapGetters('cart', ['count'])
+  },
 
   methods: {
     showDropDownBasket() {
@@ -107,7 +118,8 @@ export default {
         this.showSideBar = !this.showSideBar;
 
         this.$emit('show-sidebar', this.showSideBar);
-    }
+    },
+    ...mapActions('cart', ['removeItem'])
   },
 
   mounted() {
