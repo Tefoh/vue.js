@@ -157,10 +157,8 @@ export default {
   },
 
   created() {
-    // this.getProducts({ text: 'dfjghkdfhgdrigh' })
     this.$store.dispatch('products/getProducts', { text: 'dfjghkdfhgdrigh' })
 
-    // console.log(this.$store.getters['userName/name'])
   }
 }
 </script>

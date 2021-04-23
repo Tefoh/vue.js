@@ -9,6 +9,8 @@
 <script>
 import BaseHeader from './components/BaseHeader'
 import BaseFooter from './components/BaseFooter'
+import user from '@/store/modules/user'
+import products from '@/store/modules/products'
 export default {
 
   data: () => ({
@@ -27,9 +29,12 @@ export default {
   },
 
   created() {
-    console.log(
-      this.$store.state.products
-    )
+    // if (! this.$store.hasModule('userName')) {
+        this.$store.registerModule('userName', user)
+    // }
+    // if (! this.$store.hasModule('products')) {
+        this.$store.registerModule('products', products)
+    // }
   }
 }
 </script>
