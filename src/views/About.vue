@@ -1,5 +1,19 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <p>{{ counter }}</p>
+    <BaseBtn @click="counter++"></BaseBtn>
   </div>
 </template>
+
+<script>
+import BaseBtn from '@/components/BaseBtn'
+export default {
+  components: {
+    BaseBtn
+  },
+
+  data: () => ({
+    counter: 0
+  })
+}
+</script>
