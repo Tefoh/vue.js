@@ -1,7 +1,17 @@
 <template>
   <div class="about">
     <p>{{ counter }}</p>
-    <BaseBtn @click="counter++"></BaseBtn>
+    <BaseBtn v-on="{
+      click: () => counter++
+    }"></BaseBtn>
+    <br>
+    <br>
+
+
+    <input v-bind="attrs" v-on="on" />
+
+    <!-- <input type="text" placeholder="second input" @click="handleClick" @input="handleInput" /> -->
+
   </div>
 </template>
 
@@ -12,8 +22,25 @@ export default {
     BaseBtn
   },
 
-  data: () => ({
-    counter: 0
-  })
+  data() {
+    return {
+      str: 'test input',
+      counter: 0,
+      on: {
+        click: this.handleClick,
+        input: this.handleInput
+      },
+      attrs: { placeholder: 'my text', type: 'password' }
+    }
+  },
+
+  methods: {
+    handleClick() {
+      console.log('input clicked')
+    },
+    handleInput(event) {
+      console.log(event.target.value)
+    }
+  }
 }
 </script>
