@@ -1,9 +1,10 @@
 <template>
   <div>
-    <slot name="title" />
+    <slot name="title" message="title message" />
+    <!-- <h1>{{ message }}</h1> -->
 
 
-    <slot name="default" />
+    <slot :message="string" :num="3" />
 
 
   </div>
@@ -11,7 +12,11 @@
 
 <script>
 export default {
+  props: ['message'],
 
+  data: () => ({
+    string: 'content from child component'
+  })
 }
 </script>
 

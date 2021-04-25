@@ -4,15 +4,24 @@
     <BaseBtn type="submit">
      ذخیره
     </BaseBtn>
+
+
+
     <BaseCard>
-      <template #title>
-        <h1>my card title</h1>
+
+      <template v-slot:title="slotProps">
+        <h1>title slot: {{ slotProps.message }}</h1>
       </template>
       
-      <p>test body</p>
+      <template v-slot="{ message, num = 10 }">
 
+        <p>default slot: {{ message }}</p>
+        <p>num: {{ num }}</p>
+      </template>
 
     </BaseCard>
+
+
   </div>
 </template>
 
@@ -25,6 +34,10 @@ export default {
   components: {
     BaseBtn,
     BaseCard
-  }
+  },
+  
+  data: () => ({
+    msg: 'content from parent component',
+  })
 }
 </script>
