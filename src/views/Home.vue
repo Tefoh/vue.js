@@ -4,9 +4,9 @@
     
     
 
-    <BaseText type="p" />
-    
-    
+    <!-- <BaseText type="p" /> -->
+
+    <Counter />
     
     
     
@@ -40,13 +40,15 @@
 import BaseBtn from '@/components/BaseBtn.vue'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseText from '@/components/BaseText.vue'
+import Counter from '@/components/Counter.vue'
 
 export default {
   name: 'Home',
   components: {
     BaseBtn,
     BaseCard,
-    BaseText
+    BaseText,
+    Counter
   },
   
   data: () => ({
