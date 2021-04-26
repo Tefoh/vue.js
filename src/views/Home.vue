@@ -1,7 +1,18 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <BaseBtn type="submit">
+    
+    
+
+    <BaseText type="p" />
+    
+    
+    
+    
+    
+    
+    
+    <!-- <BaseBtn type="submit">
      ذخیره
     </BaseBtn>
 
@@ -19,7 +30,7 @@
         <p>num: {{ num }}</p>
       </template>
 
-    </BaseCard>
+    </BaseCard> -->
 
 
   </div>
@@ -28,12 +39,14 @@
 <script>
 import BaseBtn from '@/components/BaseBtn.vue'
 import BaseCard from '@/components/BaseCard.vue'
+import BaseText from '@/components/BaseText.vue'
 
 export default {
   name: 'Home',
   components: {
     BaseBtn,
-    BaseCard
+    BaseCard,
+    BaseText
   },
   
   data: () => ({
