@@ -20,6 +20,8 @@ export default {
 
     //<button class="danger" v-on:click="counter++">{{ counter }}</button>
 
+    // h => VNode vitual-node - virtual-dom
+
     return h(
       'button',
       {
