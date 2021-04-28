@@ -1,12 +1,9 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    
-    
 
-    <!-- <BaseText type="p" /> -->
+    <BaseText type="p" :options="['ali', 'mohammad', 'ahmad']" />
 
-    <Counter />
+    <!-- <Counter /> -->
     
     
     
