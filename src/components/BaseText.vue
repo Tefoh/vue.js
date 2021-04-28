@@ -1,14 +1,21 @@
+<!--
+<template>
+  <BaseInput v-model="message" />
+</template>
+-->
+
 <script>
 import { h } from 'vue'
 import BaseInput from '@/components/BaseInput'
 
 export default {
+  components: { BaseInput },
   props: {
     type: String,
     options: Array
   },
   data: () => ({
-    message: 'my message'
+    message: 'test message'
   }),
   render() {
     // // v-if

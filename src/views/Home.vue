@@ -1,11 +1,15 @@
 <template>
   <div class="home">
 
-    <BaseText type="p" :options="['ali', 'mohammad', 'ahmad']" />
+    <!-- <BaseText type="p" :options="['ali', 'mohammad', 'ahmad']" /> -->
 
     <!-- <Counter /> -->
     
-    
+    <BaseBtn>
+      <template v-slot="{ counter, handleIncrement }">
+        <button @click="handleIncrement">my counter {{ counter }}</button>
+      </template>
+    </BaseBtn>
     
     
     
