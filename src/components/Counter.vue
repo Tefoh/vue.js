@@ -1,5 +1,6 @@
 <script>
 import { h } from 'vue'
+import BaseBtn from '@/components/BaseBtn.vue'
 
 export default {
 
@@ -18,17 +19,15 @@ export default {
   
   render() {
 
-    //<button class="danger" v-on:click="counter++">{{ counter }}</button>
-
-    // h => VNode vitual-node - virtual-dom
+    //<BaseBtn>{{ counter }}</BaseBtn>
 
     return h(
-      'button',
+      BaseBtn,
       {
-        class: 'danger ' + this.className,
-        onClick: this.handleIncrement
+        class: this.className,
+        onClick: () => this.counter++
       },
-      this.counter
+      'simple btn - ' + this.counter
     );
   }
 }
@@ -37,6 +36,10 @@ export default {
 <style>
 .danger {
   background-color: red;
+  color: white;
+}
+.success {
+  background-color: green;
   color: white;
 }
 </style>
