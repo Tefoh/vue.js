@@ -15,11 +15,12 @@
     ></v-text-field>
 
     <v-text-field
-      type="password"
+      :type="showPassword ? 'text' : 'password'"
       class="mx-3"
       outlined
       label="رمز عبور"
-      prepend-icon="mdi-eye-off"
+      :prepend-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      @click:prepend="showingPassword"
     ></v-text-field>
 
     <v-card-actions>
@@ -35,7 +36,14 @@
 
 <script>
 export default {
-
+  data: () => ({
+    showPassword: false
+  }),
+  methods: {
+    showingPassword() {
+      this.showPassword = !this.showPassword
+    }
+  }
 }
 </script>
 
