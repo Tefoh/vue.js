@@ -46,13 +46,19 @@
     <v-main>
       <router-view/>
     </v-main>
+
+    <v-footer color="deep-purple" padless class="py-7">
+      <v-row justify="center" align="center">
+        <span class="white--text">تمامی حقوق این سایت محفوظ میباشد.</span>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
 export default {
   data: () => ({
-    drawer: false
+    drawer: true
   })
 }
 </script>
