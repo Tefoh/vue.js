@@ -12,7 +12,7 @@
 
     <v-navigation-drawer app right v-model="drawer">
       <template v-slot:prepend>
-        <v-list-item>
+        <v-list-item class="deep-purple lighten-5">
           <v-list-item-avatar>
             <v-img src="https://avatars.githubusercontent.com/u/26341440?v=4" />
           </v-list-item-avatar>
@@ -22,6 +22,8 @@
             <v-list-item-subtitle>مدیر سایت</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
+
+        <v-divider />
       </template>
 
       <v-list>
