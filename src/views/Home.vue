@@ -41,46 +41,48 @@
 
     <v-divider class="mt-4"></v-divider>
 
-    <p class="text-h4 font-weight-medium my-5">لیست کاربران</p>
+    
 
-    <v-data-table
-      :headers="titles"
-      :items="users"
-    >
-      <template v-slot:item.name="{ item }">
-        {{ item.name.toUpperCase() }}
-      </template>
-      <template v-slot:item.gender="{ item }">
-        <v-chip
-          :color="item.gender === 1 ? 'blue' : 'pink'"
-          dark
-        >
-        {{ item.gender === 1 
-          ? 'مرد'
-          : 'زن'
-           }}
-        </v-chip>
-      </template>
-      <template v-slot:header.gender="{ header }">
-        <template v-if="header.text === 'جنسیت'">
-          <span>جنسیت</span>
-          <span class="mr-2 blue--text">(مرد/زن)</span>
+    <v-card>
+      <v-card-title>
+        <p class="text-h4 font-weight-medium mb-5">لیست کاربران</p>
+
+        <v-spacer></v-spacer>
+
+        <v-text-field
+          label="جستجو در دیتا تیبل"
+          v-model="searchText"
+        ></v-text-field>
+      </v-card-title>
+
+      <v-data-table
+        :headers="titles"
+        :items="users"
+        :search="search"
+      >
+        <template v-slot:item.name="{ item }">
+          {{ item.name.toUpperCase() }}
         </template>
-        <template v-else>{{ header.text }}</template>
-      </template>
-      <template v-slot:body.prepend>
-        <p class="display-1">salam</p>
-      </template>
-      <template v-slot:body.append>
-        <p class="display-1">ssssssssssssss</p>
-      </template>
-      <template v-slot:body.append>
-        <p class="display-1">ssssssssssssss</p>
-      </template>
-      <template v-slot:footer>
-        <p class="body-2">footer</p>
-      </template>
-    </v-data-table>
+        <template v-slot:item.gender="{ item }">
+          <v-chip
+            :color="item.gender === 1 ? 'blue' : 'pink'"
+            dark
+          >
+          {{ item.gender === 1 
+            ? 'مرد'
+            : 'زن'
+            }}
+          </v-chip>
+        </template>
+        <template v-slot:header.gender="{ header }">
+          <template v-if="header.text === 'جنسیت'">
+            <span>جنسیت</span>
+            <span class="mr-2 blue--text">(مرد/زن)</span>
+          </template>
+          <template v-else>{{ header.text }}</template>
+        </template>
+      </v-data-table>
+    </v-card>
   </v-container>
 </template>
 
@@ -89,6 +91,8 @@ export default {
   name: 'Home',
 
   data: () => ({
+    searchText: '',
+    search: '',
     titles: [
       { text: 'اسم', value: 'name' },
       { text: 'ایمیل', value: 'email' },
@@ -108,7 +112,7 @@ export default {
         name: "Ervin Howell",
         username: "Antonette",
         gender: 2,
-        email: "Shanna@melissa.tv",
+        email: "Shanna@gmail.com",
       },
       {
         id: 3,
@@ -129,14 +133,14 @@ export default {
         name: "Chelsey Dietrich",
         username: "Kamren",
         gender: 2,
-        email: "Lucio_Hettinger@annie.ca",
+        email: "Lucio_Hettinger@gmail.com",
       },
       {
         id: 6,
         name: "Mrs. Dennis Schulist",
         username: "Leopoldo_Corkery",
         gender: 2,
-        email: "Karley_Dach@jasper.info",
+        email: "Karley_Dach@gmail.com",
       },
       {
         id: 7,
@@ -168,6 +172,19 @@ export default {
       }
     ]
   }),
+
+  watch: {
+    searchText(newValue, oldValue) {
+      if (newValue === 'مرد') {
+        this.search = "1";
+        return;
+      } else if (newValue === 'زن') {
+        this.search = "2";
+        return;
+      }
+      this.search = newValue
+    }
+  },
 
   created() {
     // this.$vuetify.theme.dark = true;
