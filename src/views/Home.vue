@@ -49,7 +49,74 @@
 
         <v-spacer></v-spacer>
 
+
+
+
+
+      <v-dialog v-model="dialog">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" v-on="on" v-bind="attrs">
+            کاربر 
+            <v-icon class="mr-2">mdi-account-plus</v-icon>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-card-title>
+            فرم کاربر جدید
+          </v-card-title>
+          <v-container>
+            <v-row>
+              <v-col cols="12" md="6" lg="4">
+                <v-text-field
+                  label="نام"
+                  v-model="userForm.name"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="6" lg="4">
+                <v-text-field
+                  label="ایمیل"
+                  v-model="userForm.email"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="6" lg="4">
+                <v-text-field
+                  label="اسم کاربری"
+                  v-model="userForm.username"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="6" lg="4">
+                <v-select
+                  v-model="userForm.gender"
+                  :items="[
+                    { genderName: 'انتخاب جنسیت', genderCode: null },
+                    { genderName: 'مرد', genderCode: 1 },
+                    { genderName: 'زن', genderCode: 2 },
+                  ]"
+                  item-text="genderName"
+                  item-value="genderCode"
+                  label="جنسیت"
+                  outlined
+                ></v-select>
+              </v-col>
+
+              <v-col cols="12" md="6" lg="4">
+              </v-col>
+
+
+              <v-col cols="12" md="6" lg="4" class="d-flex align-center">
+                <v-spacer></v-spacer>
+                <v-btn color="primary" @click="saveUser">ذخیره</v-btn>
+              </v-col>
+              
+            </v-row>
+          </v-container>
+        </v-card>
+
+      </v-dialog>
+
         <v-text-field
+          class="mr-3"
           label="جستجو در دیتا تیبل"
           v-model="searchText"
         ></v-text-field>
@@ -170,7 +237,14 @@ export default {
         gender: 2,
         email: "Rey.Padberg@karina.biz",
       }
-    ]
+    ],
+    userForm: {
+      name: '',
+      email: '',
+      username: '',
+      gender: null
+    },
+    dialog: false
   }),
 
   watch: {
@@ -183,6 +257,23 @@ export default {
         return;
       }
       this.search = newValue
+    }
+  },
+
+  methods: {
+    saveUser() {
+      this.dialog = false;
+      const id = Math.random();
+
+      this.users.push({ id, ...this.userForm })
+
+      this.userForm = {
+        name: '',
+        email: '',
+        username: '',
+        gender: null
+      }
+
     }
   },
 
