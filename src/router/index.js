@@ -6,6 +6,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'Landing',
+    component: () => import(/* webpackChunkName: "landing" */ '../views/Landing.vue')
+  },
+  {
     path: '/dashboard',
     component: () => import(/* webpackChunkName: "dashboard" */ '../layouts/Dashboard.vue'),
     children: [
@@ -13,11 +18,6 @@ const routes = [
         path: '',
         name: 'Dashboard',
         component: Home
-      },
-      {
-        path: 'about',
-        name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
       },
     ]
   },
@@ -35,7 +35,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
