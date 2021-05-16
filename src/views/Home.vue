@@ -126,6 +126,10 @@
         :headers="titles"
         :items="users"
         :search="search"
+        no-results-text="هیچ کاربری برای مورد جستجو یافت نشد"
+        :footer-props="{
+          'items-per-page-text': 'تعداد ایتم در هر صفحه:'
+        }"
       >
         <template v-slot:item.name="{ item }">
           {{ item.name.toUpperCase() }}
@@ -141,12 +145,21 @@
             }}
           </v-chip>
         </template>
+        <template v-slot:item.actions="{ item }">
+          <v-btn color="error" text @click="removeItem(item.id)">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+        </template>
         <template v-slot:header.gender="{ header }">
           <template v-if="header.text === 'جنسیت'">
             <span>جنسیت</span>
             <span class="mr-2 blue--text">(مرد/زن)</span>
           </template>
           <template v-else>{{ header.text }}</template>
+        </template>
+
+        <template v-slot:footer.page-text="{ pageStart, pageStop, itemsLength }">
+          {{ `از ${pageStart}-${pageStop} -- کل کابران (${itemsLength})` }}
         </template>
       </v-data-table>
     </v-card>
@@ -165,6 +178,7 @@ export default {
       { text: 'ایمیل', value: 'email' },
       { text: 'اسم کاربری', value: 'username' },
       { text: 'جنسیت', value: 'gender' },
+      { text: 'عملیات', value: 'actions' },
     ],
     users: [
       {
@@ -274,6 +288,9 @@ export default {
         gender: null
       }
 
+    },
+    removeItem(id) {
+      this.users = this.users.filter(user => user.id !== id)
     }
   },
 
