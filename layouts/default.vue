@@ -1,5 +1,15 @@
 <template>
   <div>
+    <nav>
+      <ul>
+        <li>
+          <NuxtLink to="/users">کاربران</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/posts">پست ها</NuxtLink>
+        </li>
+      </ul>
+    </nav>
     <Nuxt />
   </div>
 </template>

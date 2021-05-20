@@ -11,6 +11,14 @@ export default {
     return {
       title: 'لیست کاربران'
     }
+  },
+
+  // option 1:
+  // layout: 'user'
+
+  // option 2:
+  layout(ctx) {
+    return 'user'
   }
 }
 </script>
