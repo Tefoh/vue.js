@@ -7,9 +7,28 @@
 
 <script>
 export default {
+
+  // head: {
+  //   title: 'لیست کاربران',
+  //   meta: [
+  //     {
+  //       name: 'description',
+  //       content: 'لیست کامل کابران سایت',
+  //       hid: 'description'
+  //     }
+  //   ]
+  // },
+
   head() {
     return {
-      title: 'لیست کاربران'
+      title: 'لیست کاربران',
+      meta: [
+        {
+          name: 'description',
+          content: 'لیست کامل کابران سایت',
+          hid: 'description'
+        }
+      ]
     }
   },
 

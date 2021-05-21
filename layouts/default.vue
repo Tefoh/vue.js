@@ -14,6 +14,24 @@
   </div>
 </template>
 
+<script>
+export default {
+  head: {
+    script: [
+      {
+        src: '/main.js'
+      }
+    ],
+    link: [
+      {
+        rel: 'stylesheet',
+        href: '/styles.css'
+      }
+    ]
+  }
+}
+</script>
+
 <style>
 html {
   font-family:

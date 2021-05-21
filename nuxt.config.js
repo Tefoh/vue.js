@@ -1,14 +1,18 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'webamooz-nuxt',
+    title: 'دوره ناکست وب آموز',
     htmlAttrs: {
       lang: 'fa'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      {
+        name: 'description',
+        content: 'دوره ناکست وب آموز که در این دوره میخایم چندتا مینی پروژه ایجاد کنیم',
+        hid: 'description'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
