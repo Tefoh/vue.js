@@ -1,11 +1,11 @@
 <template>
   <div>
     <nav>
-      <ul>
-        <li>
+      <ul class="columns">
+        <li class="column">
           <NuxtLink to="/users">کاربران</NuxtLink>
         </li>
-        <li>
+        <li class="column">
           <NuxtLink to="/posts">پست ها</NuxtLink>
         </li>
       </ul>
