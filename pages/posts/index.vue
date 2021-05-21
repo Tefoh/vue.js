@@ -5,7 +5,9 @@
     <NuxtLink to="/users">لیست کاربران</NuxtLink>
     <p>اینجا صفحه مقالات است</p>
     <!-- <img :src="require('~/assets/logo.png')" alt=""> -->
-    <img src="~/assets/logo.png" alt="">
+    <Logo />
+    <BaseInput />
+    <LazyBaseButton />
   </div>
 </template>
 
