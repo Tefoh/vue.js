@@ -17,6 +17,12 @@ export default {
     return {
       title: 'صفحه مقالات'
     }
+  },
+  data: () => ({
+    posts: []
+  }),
+  async created() {
+    this.posts = await this.$axios.$get('/users')
   }
 }
 </script>
