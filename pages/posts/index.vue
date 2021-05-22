@@ -8,6 +8,9 @@
     <Logo />
     <BaseInput />
     <LazyBaseButton />
+    <button class="button is-info"
+      @click="$toast('شما یک پیغام دریافت کردید')"
+    >الرت</button>
   </div>
 </template>
 
