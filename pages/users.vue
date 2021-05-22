@@ -19,6 +19,11 @@ export default {
   //   ]
   // },
 
+
+  asyncData(context) {
+    context.$message('salam jadid')
+  },
+
   head() {
     return {
       title: 'لیست کاربران',
