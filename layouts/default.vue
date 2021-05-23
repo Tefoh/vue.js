@@ -1,68 +1,39 @@
 <template>
   <div>
     <nav class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="../">
-                    <Logo />
-                </a>
-                <span class="navbar-burger burger" data-target="navbarMenu">
-                        <span></span>
-                <span></span>
-                <span></span>
-                </span>
-            </div>
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    <a class="navbar-item is-active">
-                            Home
-                        </a>
-                    <a class="navbar-item">
-                            Examples
-                        </a>
-                    <a class="navbar-item">
-                            Features
-                        </a>
-                    <a class="navbar-item">
-                            Team
-                        </a>
-                    <a class="navbar-item">
-                            Archives
-                        </a>
-                    <a class="navbar-item">
-                            Help
-                        </a>
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                                Account
-                            </a>
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                    Dashboard
-                                </a>
-                            <a class="navbar-item">
-                                    Profile
-                                </a>
-                            <a class="navbar-item">
-                                    Settings
-                                </a>
-                            <hr class="navbar-divider">
-                            <div class="navbar-item">
-                                Logout
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="navbar-brand">
+          <NuxtLink class="navbar-item" :to="{ name: 'index' }">
+            <Logo />
+          </NuxtLink>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
         </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <NuxtLink class="navbar-item is-active" :to="{ name: 'index' }">
+              صفحه اصلی
+            </NuxtLink>
+            <NuxtLink class="navbar-item" :to="{ name: 'users' }">
+              کاربران
+            </NuxtLink>
+            <NuxtLink class="navbar-item" :to="{ name: 'posts' }">
+              مقالات
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
     </nav>
-    
+
     <section class="hero is-info is-medium is-bold">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <h1 class="title">مقالات مربوط به سایت وب آموز</h1>
-            </div>
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">مقالات مربوط به سایت وب آموز</h1>
         </div>
+      </div>
     </section>
 
     <Nuxt />
@@ -74,30 +45,23 @@ export default {
   head: {
     script: [
       {
-        src: '/main.js'
+        src: "/main.js"
       }
     ],
     link: [
       {
-        rel: 'stylesheet',
-        href: '/styles.css'
+        rel: "stylesheet",
+        href: "/styles.css"
       }
     ]
   }
-}
+};
 </script>
 
 <style>
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
