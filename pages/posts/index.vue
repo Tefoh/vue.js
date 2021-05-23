@@ -12,11 +12,6 @@
     <!-- <button class="button is-info"
       @click="$toast('شما یک پیغام دریافت کردید')"
     >الرت</button> -->
-    <button class="button is-info"
-      @click="refresh"
-    >دریافت دوباره اطلاعات</button>
-    <p v-if="$fetchState.pending">در حال دریافت اطلاعات مقالات</p>
-    <p v-if="$fetchState.error">هنگام دریافت اطلاعات به مشکل خوردیم</p>
     <p v-for="(post, index) in posts" :key="post.id">{{ `${index + 1}: ${post.title}` }}</p>
   </div>
 </template>
@@ -29,16 +24,20 @@ export default {
     }
   },
   data: () => ({
-    posts: []
+    posts: [
+      { title: 'post man' }
+    ]
   }),
-  async fetch() {
-    this.posts = await this.$axios.$get('/posts')
-  },
-  methods: {
-    refresh() {
-      this.posts = [];
-      this.$fetch();
+  async asyncData(context) {
+    try {
+      const posts = await context.$axios.$get('/posts')
+
+      return {
+        posts
+      }
+    } catch (error) {
+      console.log(error)
     }
-  }
+  },
 }
 </script>
