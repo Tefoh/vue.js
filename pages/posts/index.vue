@@ -1,19 +1,35 @@
 <template>
-  <div>
+  <div class="container">
+        <!-- START ARTICLE FEED -->
+        <section class="articles">
+            <div class="column is-8 is-offset-2">
+                <!-- START ARTICLE -->
+                <div class="card article" v-for="(post, index) in posts" :key="post.id">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content has-text-centered">
+                                <p class="title article-title">
+                                  {{ index + 1 }} - {{ post.title }}
+                                </p>
+                                <div class="tags has-addons level-item">
+                                    <span class="tag is-rounded is-info">
+                                      @{{ users.find(user => user.id === post.userId).username }}
+                                    </span>
+                                    <span class="tag is-rounded">May 10, 2018</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content article-body">
+                            {{ post.body }}
+                        </div>
+                    </div>
+                </div>
+                <!-- END ARTICLE -->
+              </div>
 
-    <!-- <NuxtLink :to="`/posts/${2}`">پست شماره 2</NuxtLink> -->
-    <NuxtLink :to="{ name: 'posts-id', params: { id: 4 } }">پست شماره 4</NuxtLink>
-    <NuxtLink to="/users">لیست کاربران</NuxtLink>
-    <p>اینجا صفحه مقالات است</p>
-    <!-- <img :src="require('~/assets/logo.png')" alt=""> -->
-    <Logo />
-    <BaseInput />
-    <LazyBaseButton />
-    <!-- <button class="button is-info"
-      @click="$toast('شما یک پیغام دریافت کردید')"
-    >الرت</button> -->
-    <p v-for="(post, index) in posts" :key="post.id">{{ `${index + 1}: ${post.title}` }}</p>
-  </div>
+        </section>
+        <!-- END ARTICLE FEED -->
+        </div>
 </template>
 
 <script>
@@ -31,9 +47,11 @@ export default {
   async asyncData(context) {
     try {
       const posts = await context.$axios.$get('/posts')
+      const users = await context.$axios.$get('/users')
 
       return {
-        posts
+        posts,
+        users
       }
     } catch (error) {
       console.log(error)

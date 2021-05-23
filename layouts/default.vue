@@ -1,15 +1,70 @@
 <template>
   <div>
-    <nav>
-      <ul class="columns">
-        <li class="column">
-          <NuxtLink to="/users">کاربران</NuxtLink>
-        </li>
-        <li class="column">
-          <NuxtLink to="/posts">پست ها</NuxtLink>
-        </li>
-      </ul>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="../">
+                    <Logo />
+                </a>
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                        <span></span>
+                <span></span>
+                <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item is-active">
+                            Home
+                        </a>
+                    <a class="navbar-item">
+                            Examples
+                        </a>
+                    <a class="navbar-item">
+                            Features
+                        </a>
+                    <a class="navbar-item">
+                            Team
+                        </a>
+                    <a class="navbar-item">
+                            Archives
+                        </a>
+                    <a class="navbar-item">
+                            Help
+                        </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                                Account
+                            </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                    Dashboard
+                                </a>
+                            <a class="navbar-item">
+                                    Profile
+                                </a>
+                            <a class="navbar-item">
+                                    Settings
+                                </a>
+                            <hr class="navbar-divider">
+                            <div class="navbar-item">
+                                Logout
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
+    
+    <section class="hero is-info is-medium is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">مقالات مربوط به سایت وب آموز</h1>
+            </div>
+        </div>
+    </section>
+
     <Nuxt />
   </div>
 </template>
