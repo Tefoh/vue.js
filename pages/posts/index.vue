@@ -41,6 +41,7 @@ export default {
   data: () => ({
     posts: [{ title: "post man" }]
   }),
+  middleware: ["auth"],
   async asyncData(context) {
     try {
       const posts = await context.$axios.$get("/posts");

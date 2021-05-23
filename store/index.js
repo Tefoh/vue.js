@@ -1,5 +1,8 @@
 export const state = () => ({
-  message: 'salam'
+  message: 'salam',
+  user: {
+    name: 'mohammad'
+  }
 })
 
 export const actions = {
