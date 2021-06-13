@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, PropType, reactive, toRefs, ref } from "vue";
 
 type UserRole = 'admin' | 'user'
 
@@ -30,9 +30,38 @@ export default defineComponent({
   setup() {
     const num = ref<number | string>(5)
 
-    const user = ref<UserType>({name: 'tofiq', role: 'admin'})
+    // const user = reactive<UserType>({
+    //   name: 'tofiq',
+    //   role: 'admin',
+    //   email: 'sjlkdfghjklfhkjg'
+    // })
+    
+    // const user: UserType = reactive({
+    //   name: 'tofiq',
+    //   role: 'admin',
+    //   email: 'klsdjh'
+    // })
+    const user = reactive({
+      name: 'tofiq',
+      role: 'admin',
+      email: 'sljgljfhgh'
+    }) as UserType
+
+    user.role = 'user'
+
+    // const state = reactive({
+    //   num: 8 as number | string,
+    //   user: {
+    //     name: 'tofiq',
+    //     role: 'admin'
+    //   } as UserType
+    // })
+
+    // state.user.role = 'user'
 
     return {
+      // ...toRefs(state)
+      
       num,
       user
     }
