@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <Counter />
+  <Counter :admin="{ name: 'mmd', role: 'admin' }" msg="salam" />
 </template>
 
 <script lang="ts">

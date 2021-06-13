@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 type UserRole = 'admin' | 'user'
 
@@ -14,6 +14,31 @@ interface UserType {
 }
 
 export default defineComponent({
+
+  props: {
+    msg: {
+      required: true,
+      type: [Number, String]
+    },
+    admin: {
+      required: true,
+      type: Object as PropType<UserType>
+    },
+    // users: {
+    //   required: true,
+    //   type: Array as PropType<UserType[]>
+    // }
+  },
+
+  created() {
+    // this.msg = 'e';
+    this.num = this.msg;
+    // this.admin.name
+  },
+
+
+
+
   data: () => ({
     num: 7 as number | string,
     user: {
