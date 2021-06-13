@@ -1,14 +1,16 @@
 <template>
-  <button @click="inc">counter: {{ num }}</button>
-  <p>{{ user.name }}</p>
+  <button @click="changeRole('admin')">عوض کردن نقش کاربر</button>
+  <p>{{ user.name }}: ({{ user.role }})</p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
+type UserRole = 'admin' | 'user'
+
 interface UserType {
   name: string;
-  role: 'admin' | 'user' | 1 | 2;
+  role: UserRole;
 }
 
 export default defineComponent({
@@ -20,11 +22,10 @@ export default defineComponent({
     } as UserType
   }),
   methods: {
-    inc() {
-      this.num = 'dgho;;of'
-      this.num = 2
+    changeRole(role: UserRole): boolean | void {
+      this.user.role = role;
 
-      this.user.role = 'user'
+      // return 'dt;gkh'
     }
   }
 })
