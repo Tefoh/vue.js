@@ -1,17 +1,30 @@
 <template>
-  <button @click="inc">counter: {{ number }}</button>
+  <button @click="inc">counter: {{ num }}</button>
+  <p>{{ user.name }}</p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
+interface UserType {
+  name: string;
+  role: 'admin' | 'user' | 1 | 2;
+}
+
 export default defineComponent({
   data: () => ({
-    number: 7
+    num: 7 as number | string,
+    user: {
+      name: 'tofiq',
+      role: 'admin'
+    } as UserType
   }),
   methods: {
     inc() {
-      this.number++
+      this.num = 'dgho;;of'
+      this.num = 2
+
+      this.user.role = 'user'
     }
   }
 })
