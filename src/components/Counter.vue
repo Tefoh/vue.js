@@ -1,5 +1,5 @@
 <template>
-  <!-- <button @click="changeRole('admin')">عوض کردن نقش کاربر</button> -->
+  <button @click="changeRole('user')">عوض کردن نقش کاربر</button>
   <p>{{ user.name }}: ({{ user.role }})</p>
   <button @click="num--">counter: {{ num }}</button>
 </template>
@@ -28,42 +28,29 @@ export default defineComponent({
   },
 
   setup() {
-    const num = ref<number | string>(5)
+    const num = ref(5)
 
-    // const user = reactive<UserType>({
-    //   name: 'tofiq',
-    //   role: 'admin',
-    //   email: 'sjlkdfghjklfhkjg'
-    // })
-    
-    // const user: UserType = reactive({
-    //   name: 'tofiq',
-    //   role: 'admin',
-    //   email: 'klsdjh'
-    // })
-    const user = reactive({
+    const user = reactive<UserType>({
       name: 'tofiq',
       role: 'admin',
-      email: 'sljgljfhgh'
-    }) as UserType
+    })
 
-    user.role = 'user'
+    const changeRole = (roleName: UserRole): void | boolean => {
+      user.role = roleName
 
-    // const state = reactive({
-    //   num: 8 as number | string,
-    //   user: {
-    //     name: 'tofiq',
-    //     role: 'admin'
-    //   } as UserType
-    // })
+      return true
+    }
+    
+    // function changeRole(roleName: UserRole): void | boolean {
+    //   user.role = roleName
 
-    // state.user.role = 'user'
-
+    //   return true
+    // }
+    
     return {
-      // ...toRefs(state)
-      
       num,
-      user
+      user,
+      changeRole
     }
   }
 
