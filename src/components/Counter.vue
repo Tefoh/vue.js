@@ -1,11 +1,11 @@
 <template>
-  <button @click="changeRole('user')">عوض کردن نقش کاربر</button>
-  <p>{{ user.name }}: ({{ user.role }})</p>
+  <button @click="changeName">عوض کردن نام کاربر</button>
+  <p>{{ userName }}: ({{ user.role }})</p>
   <button @click="num--">counter: {{ num }}</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, toRefs, ref } from "vue";
+import { defineComponent, PropType, reactive, toRefs, ref, computed } from "vue";
 
 type UserRole = 'admin' | 'user'
 
@@ -35,10 +35,10 @@ export default defineComponent({
       role: 'admin',
     })
 
-    const changeRole = (roleName: UserRole): void | boolean => {
-      user.role = roleName
+    const userName = computed((): string[] => user.name.split(''))
 
-      return true
+    const changeName = (): void | boolean => {
+      user.name = 'djtphojdtophjopdtg'
     }
     
     // function changeRole(roleName: UserRole): void | boolean {
@@ -50,7 +50,8 @@ export default defineComponent({
     return {
       num,
       user,
-      changeRole
+      changeName,
+      userName
     }
   }
 
