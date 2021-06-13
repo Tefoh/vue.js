@@ -1,10 +1,11 @@
 <template>
-  <button @click="changeRole('admin')">عوض کردن نقش کاربر</button>
+  <!-- <button @click="changeRole('admin')">عوض کردن نقش کاربر</button> -->
   <p>{{ user.name }}: ({{ user.role }})</p>
+  <button @click="num--">counter: {{ num }}</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 
 type UserRole = 'admin' | 'user'
 
@@ -24,35 +25,33 @@ export default defineComponent({
       required: true,
       type: Object as PropType<UserType>
     },
-    // users: {
-    //   required: true,
-    //   type: Array as PropType<UserType[]>
-    // }
   },
 
-  created() {
-    // this.msg = 'e';
-    this.num = this.msg;
-    // this.admin.name
-  },
+  setup() {
+    const num = ref<number | string>(5)
 
+    const user = ref<UserType>({name: 'tofiq', role: 'admin'})
 
-
-
-  data: () => ({
-    num: 7 as number | string,
-    user: {
-      name: 'tofiq',
-      role: 'admin'
-    } as UserType
-  }),
-  methods: {
-    changeRole(role: UserRole): boolean | void {
-      this.user.role = role;
-
-      // return 'dt;gkh'
+    return {
+      num,
+      user
     }
   }
+
+  // data: () => ({
+  //   num: 7 as number | string,
+  //   user: {
+  //     name: 'tofiq',
+  //     role: 'admin'
+  //   } as UserType
+  // }),
+  // methods: {
+  //   changeRole(role: UserRole): boolean | void {
+  //     this.user.role = role;
+
+  //     // return 'dt;gkh'
+  //   }
+  // }
 })
 </script>
 
