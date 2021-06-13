@@ -1,20 +1,13 @@
 <template>
-  <button @click="changeName">عوض کردن نام کاربر</button>
-  <p>{{ userName }}: ({{ user.role }})</p>
+  <User :user="user" @change-name="(role) => user.role = role" />
   <button @click="num--">counter: {{ num }}</button>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, reactive, toRefs, ref, computed } from "vue";
+import { UserType, UserRole } from '@/types/user'
+import User from './User.vue'
 
-type UserRole = 'admin' | 'user'
-
-interface UserType {
-  name: string;
-  role: UserRole;
-}
-
-  // esm inja ok shod
 interface PropTypes  {
   msg?: string;
   admin?: UserType;
@@ -34,9 +27,11 @@ export default defineComponent({
   //   },
   // },
 
+  components: {
+    User
+  },
 
 
-  // esm inja ok shod
   setup(props: PropTypes) {
 
     props.admin?.name
