@@ -14,20 +14,33 @@ interface UserType {
   role: UserRole;
 }
 
+  // esm inja ok shod
+interface PropTypes  {
+  msg?: string;
+  admin?: UserType;
+  [key: string]: unknown
+}
+
 export default defineComponent({
 
-  props: {
-    msg: {
-      required: true,
-      type: [Number, String]
-    },
-    admin: {
-      required: true,
-      type: Object as PropType<UserType>
-    },
-  },
+  // props: {
+  //   msg: {
+  //     required: true,
+  //     type: [Number, String]
+  //   },
+  //   admin: {
+  //     required: true,
+  //     type: Object as PropType<UserType>
+  //   },
+  // },
 
-  setup() {
+
+
+  // esm inja ok shod
+  setup(props: PropTypes) {
+
+    props.admin?.name
+
     const num = ref(5)
 
     const user = reactive<UserType>({
