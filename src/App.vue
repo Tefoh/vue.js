@@ -9,13 +9,13 @@ import HelloWorld from './components/HelloWorld.vue';
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
   },
   created() {
     const name = 'mmad';
 
     const last = 'mmadi';
-  }
+  },
 };
 </script>
 
