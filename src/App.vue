@@ -1,10 +1,20 @@
 <template>
   <p>{{ counter }}</p>
   <button @click="increment">increment counter</button>
+  <br />
+  <br />
+  <component :is="condition ? Button : Input" />
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+
+import Button from './components/Base/Button.vue'
+import Input from './components/Base/Input.vue'
+
+const condition = computed(() => {
+  return false;
+})
 
 const counter = ref(7);
 
