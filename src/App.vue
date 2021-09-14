@@ -1,16 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <Users />
+  <p>{{ counter }}</p>
+  <button @click="increment">increment counter</button>
 </template>
 
-<script>
-import Users from "./components/Users.vue";
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  name: "App",
-  components: {
-    Users
-  }
+const counter = ref(7);
+
+function increment() {
+  counter.value++;
 };
 </script>
 
