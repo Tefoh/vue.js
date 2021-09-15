@@ -3,17 +3,19 @@
   <button @click="increment">increment counter</button>
   <br />
   <br />
-  <component :is="condition ? Button : Input" />
+  <Base.Form>
+    <Base.Input />
+    <Base.Button />
+  </Base.Form>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
 
-import Button from './components/Base/Button.vue'
-import Input from './components/Base/Input.vue'
+import Base from './components/Base'
 
 const condition = computed(() => {
-  return false;
+  return true;
 })
 
 const counter = ref(7);
