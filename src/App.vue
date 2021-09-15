@@ -3,7 +3,7 @@
   <br />
   <Base.Form>
     <Base.Input />
-    <Base.Button :counter="counter" @inc="increment" />
+    <Base.Button class="red" :counter="counter" @inc="increment" />
   </Base.Form>
 </template>
 
