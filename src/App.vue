@@ -1,11 +1,9 @@
 <template>
-  <p>{{ counter }}</p>
-  <button @click="increment">increment counter</button>
   <br />
   <br />
   <Base.Form>
     <Base.Input />
-    <Base.Button />
+    <Base.Button :counter="counter" @inc="increment" />
   </Base.Form>
 </template>
 
@@ -20,7 +18,8 @@ const condition = computed(() => {
 
 const counter = ref(7);
 
-function increment() {
+function increment(number, string) {
+  console.log({ number, string });
   counter.value++;
 };
 </script>
